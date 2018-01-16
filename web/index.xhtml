@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Webseiten Bewertung</title>
+        <h:outputStylesheet library="CSS" name="index.css"  />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputText styleClass="h1" value="Webseiten Bewertung"/>
+        </h:form>
+        <br/>
+        
+        <ui:repeat var="message" value="#{hints.hints}">
+            <h:form>
+                <h:outputText value="- "/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:outputText value="#{message}"/>
+            </h:form>
+        </ui:repeat>
+        
+        <br/>
+        
+        <h:form>
+            <span style="display:inline-block; width: 5px;"></span>
+            <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}"/>
+        </h:form>
+        
+        <h:form styleClass="login">
+            <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
+            <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
+            <span style="display:inline-block; width: 5px;"></span>
+            <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
+            
+            <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
+            <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
+            <span style="display:inline-block; width: 5px;"></span>
+            <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
+        </h:form>
+        
+        <ui:repeat var="entry" value="#{index.entries}">
+            <h:form>
+                <h:outputText value="#{entry.name}"/>
+                <span style="display:inline-block; width: 10px;"></span>
+                <h:outputText value="#{entry.stars}"/>
+            </h:form>
+        </ui:repeat>
+    </h:body>
+</html>
+

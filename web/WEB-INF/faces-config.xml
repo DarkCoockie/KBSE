@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    
+    <managed-bean>
+        <managed-bean-name>forward</managed-bean-name>
+        <managed-bean-class>com.example.ForwardBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>action</property-name>
+            <value>#{param.action}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>actionParam</property-name>
+            <value>#{param.actionParam}</value>
+        </managed-property>
+    </managed-bean>
+
+</faces-config>
