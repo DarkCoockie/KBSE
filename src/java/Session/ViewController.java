@@ -43,7 +43,7 @@ public class ViewController implements Serializable{
     
     public void logout()
     {
-        this.username = null;
+        this.username = "";
     }
     
     public boolean loggedIn()
@@ -58,9 +58,12 @@ public class ViewController implements Serializable{
     
     private boolean checkInput(String input, String forbidden)
     {
-        for(int i=0; i < forbidden.length(); i++)
+        for(int i=0; i < forbidden.length()-1; i++)
         {
-            if(input.contains(forbidden.substring(i, i+1)))
+            if(input.
+                    contains(
+                            forbidden.
+                                    substring(i, i+1)))
             {
                 return false;
             }
@@ -132,16 +135,42 @@ public class ViewController implements Serializable{
     
     public boolean userHasStars()
     {
-        return this.controller.getUser(this.username).getStars() > Constants.Values.STARS_MIN;
+        return this.getUserStars() > Constants.Values.STARS_MIN;
     }
     
     public boolean userHasMaxStars()
     {
-        return this.controller.getUser(this.username).getStars() == Constants.Values.STARS_MAX;
+        return this.getUserStars() == Constants.Values.STARS_MAX;
     }
     
     public boolean userSpendStars(int id)
     {
-        return this.controller.getUser(this.username).getRating(id) != null;
+        Persistence.User user = this.controller.getUser(this.username);
+        if(user == null)
+        {
+            return false;
+        }
+        return user.getRating(id) != null;
+    }
+    
+    public int getUserStars()
+    {
+        Persistence.User user = this.controller.getUser(this.username);
+        if(user == null)
+        {
+            return -1;
+        }
+        return user.getStars();
+    }
+    
+    public boolean userCreatedEntry(int id)
+    {
+        Persistence.Entry entry = this.controller.getEntry(id);
+        if(entry == null)
+        {
+            return false;
+        }
+        
+        return entry.getUser().equals(this.username);
     }
 }

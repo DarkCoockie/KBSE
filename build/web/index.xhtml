@@ -31,9 +31,11 @@
 
             <h:form styleClass="login">
                 <h:panelGroup layout="block" rendered="#{login.loggedIn()}">
-                    <h:outputText value="Eingeloogt als: "/>
-                    <h:outputText value="#{login.username}"/>
-                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:outputText value="#{login.username}" style="font-weight: bold"/>
+                    <span style="display:inline-block; width: 10px;"></span>
+                    <h:outputText value="Punkte: "/>
+                    <h:outputText value="#{index.getUserStars()}"/>
+                    <span style="display:inline-block; width: 10px;"></span>
                     <h:commandButton value="Logout" action="#{login.logout()}"/>
                 </h:panelGroup>
 
@@ -72,7 +74,7 @@
                         </h:form>
                     </h:column>
                     <h:column>
-                        <h:form>
+                        <h:form rendered="#{!index.userCreatedEntry(entry.id) and login.loggedIn()}">
                             <h:commandButton styleClass="buttonInc" action="#{index.incrementStars(entry.id)}" 
                                 image="resources/images/button_inc.png"
                                 style="visibility: #{index.userHasStars()?'visible':'hidden'}"

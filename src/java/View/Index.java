@@ -6,9 +6,7 @@
 package View;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -65,5 +63,15 @@ public class Index implements Serializable{
     public boolean userSpendStars(int id)
     {
         return this.vc.userSpendStars(id);
+    }
+    
+    public int getUserStars()
+    {
+        return this.vc.getUserStars();
+    }
+    
+    public boolean userCreatedEntry(int id)
+    {
+        return this.vc.userCreatedEntry(id);
     }
 }

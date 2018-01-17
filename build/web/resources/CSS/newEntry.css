@@ -8,6 +8,14 @@ and open the template in the editor.
     Author     : Marcel
 */
 
+.container{
+    margin-top: 2%;
+    margin-left: 15%;
+    margin-right: 15%;
+    min-height: 82vh;
+    padding: 3%;
+}
+
 .h1{
     color: black;
     font-size: xx-large;
