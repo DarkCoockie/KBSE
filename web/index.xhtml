@@ -2,51 +2,91 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Webseiten Bewertung</title>
         <h:outputStylesheet library="CSS" name="index.css"  />
     </h:head>
-    <h:body>
-        <h:form>
-            <h:outputText styleClass="h1" value="Webseiten Bewertung"/>
-        </h:form>
-        <br/>
-        
-        <ui:repeat var="message" value="#{hints.hints}">
-            <h:form>
-                <h:outputText value="- "/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:outputText value="#{message}"/>
+    <h:body style="background-color: dimgrey">
+        <div class="container" style="background-color: #fcfcfc">
+            <h:form style="text-align: center">
+                <h:outputText styleClass="h1" value="Webseiten Bewertung"/>
             </h:form>
-        </ui:repeat>
-        
-        <br/>
-        
-        <h:form>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}"/>
-        </h:form>
-        
-        <h:form styleClass="login">
-            <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
-            <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
+            <br/>
+
+            <ui:repeat var="message" value="#{hints.hints}">
+                <h:form>
+                    <h:outputText value="- "/>
+                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:outputText value="#{message}"/>
+                </h:form>
+            </ui:repeat>
+
+            <br/>
+
+            <h:form>
+                <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}" rendered="#{login.loggedIn()}"/>
+            </h:form>
+
+            <h:form styleClass="login">
+                <h:panelGroup layout="block" rendered="#{login.loggedIn()}">
+                    <h:outputText value="Eingeloogt als: "/>
+                    <h:outputText value="#{login.username}"/>
+                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:commandButton value="Logout" action="#{login.logout()}"/>
+                </h:panelGroup>
+
+                <h:panelGroup layout="block" rendered="#{!login.loggedIn()}">
+                    <h:outputText value="Login: "/>
+                    <h:inputText value="#{login.username}"/>
+                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:commandButton value="Login" action="#{login.login()}"/>
+                </h:panelGroup>
+            </h:form>
             
-            <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
-            <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
-        </h:form>
-        
-        <ui:repeat var="entry" value="#{index.entries}">
-            <h:form>
-                <h:outputText value="#{entry.name}"/>
-                <span style="display:inline-block; width: 10px;"></span>
-                <h:outputText value="#{entry.stars}"/>
-            </h:form>
-        </ui:repeat>
+            <div style="margin-top: 50px">
+                <h:dataTable value="#{index.entries}" var="entry" styleClass="order-table"
+                    headerClass="order-table-header"
+                    rowClasses="order-table-odd-row,order-table-even-row"
+                    columnClasses="column1,column2,column3"
+                    style="border-spacing: 20px 0;"
+                >
+                    <h:column>
+                        <f:facet name="header">Webseite</f:facet>
+                        <h:form>
+                            <h:outputText value="#{entry.name}" style="display: block;" styleClass="column1"/>
+                            <h:outputText value="#{entry.url}" style="display: block;" styleClass="column1"/>
+                        </h:form>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Beschreibung</f:facet>
+                        <h:form>
+                            <h:outputText value="#{entry.description}"/>
+                        </h:form>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bewertung</f:facet>
+                        <h:form>
+                            <h:outputText value="#{entry.stars}"/>
+                        </h:form>
+                    </h:column>
+                    <h:column>
+                        <h:form>
+                            <h:commandButton styleClass="buttonInc" action="#{index.incrementStars(entry.id)}" 
+                                image="resources/images/button_inc.png"
+                                style="visibility: #{index.userHasStars()?'visible':'hidden'}"
+                            />
+                            <span style="display:inline-block; width: 5px;"></span>
+                            <h:commandButton styleClass="buttonDec" action="#{index.decrementStars(entry.id)}" 
+                                image="resources/images/button_dec.png"
+                                style="visibility: #{index.userSpendStars(entry.id)?'visible':'hidden'}"
+                            />
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
     </h:body>
 </html>
 

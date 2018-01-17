@@ -22,6 +22,7 @@ import javax.inject.Named;
 public class Index implements Serializable{
     
     @Inject Session.ViewController vc;
+    @Inject Hints hints;
     
     public List<Persistence.Entry> getEntries()
     {
@@ -31,5 +32,38 @@ public class Index implements Serializable{
     public String newEntry()
     {
         return Constants.Constants.NEW_ENTRY_PAGE;
+    }
+    
+    public void incrementStars(int id)
+    {
+        String returnVal = this.vc.incrementStars(id);
+        if(!returnVal.equals(Constants.Constants.SUCCESS))
+        {
+            this.hints.addHint(returnVal);
+        }
+    }
+    
+    public void decrementStars(int id)
+    {
+        String returnVal = this.vc.decrementStars(id);
+        if(!returnVal.equals(Constants.Constants.SUCCESS))
+        {
+            this.hints.addHint(returnVal);
+        }
+    }
+    
+    public boolean userHasStars()
+    {
+        return this.vc.userHasStars();
+    }
+    
+    public boolean userHasMaxStars()
+    {
+        return this.vc.userHasMaxStars();
+    }
+    
+    public boolean userSpendStars(int id)
+    {
+        return this.vc.userSpendStars(id);
     }
 }

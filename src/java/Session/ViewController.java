@@ -16,7 +16,7 @@ import javax.inject.Inject;
  */
 @SessionScoped
 public class ViewController implements Serializable{
-    @Inject Controller.Controller controler;
+    @Inject Controller.Controller controller;
     private String username = "";
 
     /**
@@ -33,13 +33,17 @@ public class ViewController implements Serializable{
             return Constants.ErrorMessages.INVALID_INPUT;
         }
         this.username = username;
+        if(this.controller.getUser(username) == null)
+        {
+            this.controller.addUser(username);
+        }
         
         return Constants.Constants.SUCCESS;
     }
     
     public void logout()
     {
-        this.username = "";
+        this.username = null;
     }
     
     public boolean loggedIn()
@@ -67,7 +71,7 @@ public class ViewController implements Serializable{
     
     public List<Persistence.Entry> getEntries()
     {
-        return this.controler.getEntries();
+        return this.controller.getEntries();
     }
     
     public String addEntry(Persistence.Entry entry)
@@ -87,8 +91,57 @@ public class ViewController implements Serializable{
             return "[Beschreibung]" + Constants.ErrorMessages.INVALID_INPUT;
         }
         
-        this.controler.addEntry(entry);
+        this.controller.addEntry(entry);
         
         return Constants.Constants.SUCCESS;
+    }
+    
+    public String incrementStars(int id)
+    {
+        Persistence.Entry entry = this.controller.getEntry(id);
+        if(entry == null)
+        {
+            return Constants.ErrorMessages.ENTRY_NOT_FOUND;
+        }
+        
+        String returnVal = this.controller.getUser(this.username).incRating(id);
+        if(returnVal.equals(Constants.Constants.SUCCESS))
+        {
+            entry.setStars(entry.getStars() + 1);
+        }
+        
+        return returnVal;
+    }
+    
+    public String decrementStars(int id)
+    {
+        Persistence.Entry entry = this.controller.getEntry(id);
+        if(entry == null)
+        {
+            return Constants.ErrorMessages.ENTRY_NOT_FOUND;
+        }
+        
+        String returnVal = this.controller.getUser(this.username).decRating(id);
+        if(returnVal.equals(Constants.Constants.SUCCESS))
+        {
+            entry.setStars(entry.getStars() - 1);
+        }
+        
+        return returnVal;
+    }
+    
+    public boolean userHasStars()
+    {
+        return this.controller.getUser(this.username).getStars() > Constants.Values.STARS_MIN;
+    }
+    
+    public boolean userHasMaxStars()
+    {
+        return this.controller.getUser(this.username).getStars() == Constants.Values.STARS_MAX;
+    }
+    
+    public boolean userSpendStars(int id)
+    {
+        return this.controller.getUser(this.username).getRating(id) != null;
     }
 }
