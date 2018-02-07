@@ -61,9 +61,9 @@ public class Index implements Serializable{
        return Constants.Constants.INDEX_PAGE;
     }
     
-    public boolean userHasPoints()
+    public boolean userHasPoints(String username)
     {
-        Persistence.Member user = this.vc.getUser();
+        Persistence.Member user = this.vc.getUser(username);
         if(user == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
@@ -73,26 +73,21 @@ public class Index implements Serializable{
         return user.getPoints() > 0;
     }
     
-    public boolean isAuthor(int id)
+    public boolean isAuthor(int entryId, String username)
     {
-        Persistence.Member user = this.vc.getUser();
+        Persistence.Member user = this.vc.getUser(username);
         if(user == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
             return true;
         }
-        Persistence.Entry entry = this.vc.getEntry(id);
+        Persistence.Entry entry = this.vc.getEntry(entryId);
         if(entry == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_ENTRY);
             return true;
         }
         
-        if(entry.getUser().equals(user.getName()))
-        {
-           return true;
-        }
-        
-        return false;
+        return entry.getUser().equals(user.getName());
     }
 }

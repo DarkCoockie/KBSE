@@ -34,6 +34,8 @@ public class ViewController implements Serializable{
         }
         this.username = username;
         
+        this.controler.addUser(new Persistence.Member(username));
+        
         return Constants.Constants.SUCCESS;
     }
     
@@ -119,9 +121,9 @@ public class ViewController implements Serializable{
         return this.controler.deleteEntry(id);
     }
     
-    public Persistence.Member getUser()
+    public Persistence.Member getUser(String username)
     {
-        return this.controler.getUser(this.username);
+        return this.controler.getUser(username);
     }
     
     public Persistence.Entry getEntry(int id)

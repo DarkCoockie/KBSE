@@ -48,11 +48,11 @@
                     <span style="display:inline-block; width: 10px;"></span>
                     <h:outputText value="#{entry.stars}"/>
                     <h:commandButton action="#{index.incrementEntry(entry.id)}" styleClass="incImg" 
-                                     rendered="#{login.loggedIn() &amp;&amp; index.userHasPoints() &amp;&amp; 
-                                                 !index.isAuthor(entry.id)}"/>
+                                     rendered="#{login.loggedIn() and index.userHasPoints(login.username) and 
+                                                 !index.isAuthor(entry.id, login.username)}"/>
                     <h:commandButton action="#{index.decrementEntry(entry.id)}" styleClass="decImg"
-                                     rendered="#{login.loggedIn() &amp;&amp; entry.stars > 0 &amp;&amp;
-                                                 !index.isAuthor(entry.id)}"/>
+                                     rendered="#{login.loggedIn() and entry.hasStars() and
+                                                 !index.isAuthor(entry.id, login.username)}"/>
                     <h:commandButton value="löschen" action="#{index.deleteEntry(entry.id)}"></h:commandButton>
                 </h:form>
             </ui:repeat>

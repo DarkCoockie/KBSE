@@ -73,4 +73,8 @@ public class Entry implements Serializable {
         this.stars = stars;
     }
     
+    public boolean hasStars()
+    {
+        return this.stars > 0;
+    }
 }

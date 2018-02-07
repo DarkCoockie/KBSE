@@ -20,9 +20,15 @@ import javax.persistence.Id;
 public class Member implements Serializable {
     @Id
     private String name;
-    private int points = 0;
+    private int points = 10;
 
-    public Member(){}
+    public Member() {
+    }
+
+    public Member(String name)
+    {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
