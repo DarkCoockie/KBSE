@@ -47,6 +47,7 @@
                     <h:outputText value="#{entry.name}"/>
                     <span style="display:inline-block; width: 10px;"></span>
                     <h:outputText value="#{entry.stars}"/>
+                    <h:commandButton value="löschen" action="#{index.deleteEntry(entry.id)}"></h:commandButton>
                 </h:form>
             </ui:repeat>
         </div>

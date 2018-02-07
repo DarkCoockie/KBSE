@@ -91,4 +91,8 @@ public class ViewController implements Serializable{
         
         return Constants.Constants.SUCCESS;
     }
+    
+     public String deleteEntry(int id){
+        return this.controler.deleteEntry(id);
+    }
 }

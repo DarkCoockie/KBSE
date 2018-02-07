@@ -7,6 +7,8 @@ package Persistence;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -15,20 +17,24 @@ import javax.persistence.Id;
  */
 @Entity
 public class Entry implements Serializable {
-    @Id private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     
     private String name;
     private String description;
     private String url;
     private int stars = 0;
-    private String user;
+    private String userName;
 
+    public Entry(){}
+    
     public String getUser() {
-        return user;
+        return userName;
     }
 
     public void setUser(String user) {
-        this.user = user;
+        this.userName = user;
     }
 
     public String getName() {
