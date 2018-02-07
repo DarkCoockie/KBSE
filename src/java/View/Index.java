@@ -52,4 +52,12 @@ public class Index implements Serializable{
             this.hints.addHint(returnMessage);
         }
     }
+    
+    public String deleteEntry(int id){
+        if( !this.vc.deleteEntry(id).equals(Constants.Constants.SUCCESS)){
+           //TODO Fehlermeldung Ausgeben
+           return Constants.Constants.INDEX_PAGE;
+       }
+       return Constants.Constants.INDEX_PAGE;
+    }
 }

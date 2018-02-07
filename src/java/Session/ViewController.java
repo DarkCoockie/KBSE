@@ -96,7 +96,7 @@ public class ViewController implements Serializable{
     {
         Persistence.Entry entry = this.controler.getEntry(id);
         if(entry == null)
-            return Constants.ErrorMessages.ENTRY_NOT_FOUND;
+            return Constants.ErrorMessages.CANT_FIND_ENTRY;
         
         entry.setStars(entry.getStars() + 1);
         
@@ -107,10 +107,15 @@ public class ViewController implements Serializable{
     {
         Persistence.Entry entry = this.controler.getEntry(id);
         if(entry == null)
-            return Constants.ErrorMessages.ENTRY_NOT_FOUND;
+            return Constants.ErrorMessages.CANT_FIND_ENTRY;
         
         entry.setStars(entry.getStars() - 1);
         
         return Constants.Constants.SUCCESS;
+    }
+    
+    public String deleteEntry(int id)
+    {
+        return this.controler.deleteEntry(id);
     }
 }
