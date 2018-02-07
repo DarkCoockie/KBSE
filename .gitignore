@@ -1,1 +1,4 @@
-./nbproject/private/private.properties
+
+build/*
+nbproject/private/private.properties
+src/conf/persistence.xml
