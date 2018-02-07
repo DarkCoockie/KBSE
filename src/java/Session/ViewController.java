@@ -104,11 +104,7 @@ public class ViewController implements Serializable{
         if(user == null)
             return Constants.ErrorMessages.CANT_FIND_USER;
         
-        user.setPoints(user.getPoints() - 1);
-        
-        entry.setStars(entry.getStars() + 1);
-        
-        return Constants.Constants.SUCCESS;
+        return user.incRating(entry);
     }
     
     public String decrementEntry(int id)
@@ -121,11 +117,7 @@ public class ViewController implements Serializable{
         if(user == null)
             return Constants.ErrorMessages.CANT_FIND_USER;
         
-        user.setPoints(user.getPoints() + 1);
-        
-        entry.setStars(entry.getStars() - 1);
-        
-        return Constants.Constants.SUCCESS;
+        return user.decRating(entry);
     }
     
     public String deleteEntry(int id)

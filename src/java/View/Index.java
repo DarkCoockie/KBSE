@@ -82,4 +82,15 @@ public class Index implements Serializable{
         
         return entry.getUser().equals(user.getName());
     }
+    
+    public boolean userHasSpentPoints(int id, String username)
+    {
+        Persistence.Member user = this.vc.getUser(username);
+        if(user == null)
+        {
+            this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
+            return false;
+        }
+        return user.getRatings().get(id) != null;
+    }
 }

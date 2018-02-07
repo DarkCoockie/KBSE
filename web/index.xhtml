@@ -59,7 +59,8 @@
                         <span style="display:inline-block; width: 5px;"></span>
                         <h:commandLink action="#{index.decrementEntry(entry.id)}"
                                        rendered="#{login.loggedIn() and entry.hasStars() and
-                                            !index.isAuthor(entry.id, login.username)}"> 
+                                            !index.isAuthor(entry.id, login.username) and
+                                            index.userHasSpentPoints(entry.id, login.username)}"> 
                             <h:graphicImage name="images/button_dec.png" alt="Img" class="decImg"/>
                         </h:commandLink>
                     </div>
