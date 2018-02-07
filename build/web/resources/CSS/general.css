@@ -33,6 +33,14 @@ and open the template in the editor.
     margin-right: 10%;
     margin-top: 0px;
     margin-bottom: 0px;
-    padding: 5%;
-    min-height: 75vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 5vw;
+    padding-top: 2vh;
+    min-height: 87vh;
+}
+
+body{
+    margin: 0;
+    padding: 0;
 }

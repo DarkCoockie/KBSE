@@ -8,3 +8,13 @@ and open the template in the editor.
     Author     : Marcel
 */
 
+.left{
+    width: 10vw;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.right{
+    width: 10vw;
+    display: inline-block;
+}

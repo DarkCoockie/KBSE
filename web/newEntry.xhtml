@@ -40,25 +40,34 @@
 
             <h:form>
                 <!-- Name-->
-                <h:outputText value="Name der Seite" style="font-weight: bold"/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:inputText value="#{newEntry.entryName}"/>
+                <div class="left">
+                    <h:outputText value="Name der Seite" style="font-weight: bold"/>
+                </div>
+                <div class="right">
+                    <h:inputText value="#{newEntry.entryName}"/>
+                </div>
                 <br/><br/>
 
                 <!-- URL-->
-                <h:outputText value="URL" style="font-weight: bold"/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:inputText value="#{newEntry.entryUrl}"/>
+                <div class="left">
+                    <h:outputText value="URL" style="font-weight: bold"/>
+                </div>
+                <div class="right">
+                    <h:inputText value="#{newEntry.entryUrl}"/>
+                </div>
                 <br/><br/>
 
                 <!-- Description-->
-                <h:outputText value="Beschreibung" style="font-weight: bold"/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:inputText value="#{newEntry.entryDescription}"/>
+                <div class="left">
+                    <h:outputText value="Beschreibung" style="font-weight: bold"/>
+                </div>
+                <div class="right">
+                    <h:inputText value="#{newEntry.entryDescription}"/>
+                </div>
                 <br/><br/>
 
                 <!-- Confirm-->
-                <h:commandButton value="Bestätigen" action="#{newEntry.confirm()}"/>
+                <h:commandButton class="left" value="Bestätigen" action="#{newEntry.confirm()}"/>
             </h:form>
         </div>
     </h:body>
