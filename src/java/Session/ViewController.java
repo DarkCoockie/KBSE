@@ -118,4 +118,14 @@ public class ViewController implements Serializable{
     {
         return this.controler.deleteEntry(id);
     }
+    
+    public Persistence.User getUser()
+    {
+        return this.controler.getUser(this.username);
+    }
+    
+    public Persistence.Entry getEntry(int id)
+    {
+        return this.controler.getEntry(id);
+    }
 }

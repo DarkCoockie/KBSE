@@ -21,6 +21,7 @@ import javax.inject.Named;
 @Dependent
 public class Controller implements Serializable {
     private List<Persistence.Entry> entries;
+    private List<Persistence.User> users;
     private PersistenceController pc = new PersistenceController();
     
     @PostConstruct
@@ -57,6 +58,39 @@ public class Controller implements Serializable {
         {
             if(entry.getId() == id)
                 return entry;
+        }
+        return null;
+    }
+    
+    private void updateUserList(){
+        this.entries = pc.getAllEntrys();
+    }
+    
+    public List<Persistence.User> getUsers(){
+        this.updateUserList();
+        return this.users;
+    }
+    
+    public void addUser(Persistence.User user){   
+        if(this.pc.addUser(user) == Constants.Constants.SUCCESS){
+             this.users.add(user);
+        }
+    }
+    
+    public String deleteUser(String name){
+        Persistence.User target = null;
+        if(( target = this.pc.findUser(name) ) != null) {
+          return this.pc.deleteUser(target) ? Constants.Constants.SUCCESS : Constants.ErrorMessages.CANT_DELETE_USER;
+        }
+        return Constants.ErrorMessages.CANT_FIND_ENTRY;
+    }
+    
+    public Persistence.User getUser(String name)
+    {
+        for(Persistence.User user : this.getUsers())
+        {
+            if(user.getName().equals(name))
+                return user;
         }
         return null;
     }

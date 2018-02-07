@@ -60,4 +60,39 @@ public class Index implements Serializable{
        }
        return Constants.Constants.INDEX_PAGE;
     }
+    
+    public boolean userHasPoints()
+    {
+        Persistence.User user = this.vc.getUser();
+        if(user == null)
+        {
+            this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
+            return false;
+        }
+        
+        return user.getPoints() > 0;
+    }
+    
+    public boolean isAuthor(int id)
+    {
+        Persistence.User user = this.vc.getUser();
+        if(user == null)
+        {
+            this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
+            return true;
+        }
+        Persistence.Entry entry = this.vc.getEntry(id);
+        if(entry == null)
+        {
+            this.hints.addHint(Constants.ErrorMessages.CANT_FIND_ENTRY);
+            return true;
+        }
+        
+        if(entry.getUser().equals(user.getName()))
+        {
+           return true;
+        }
+        
+        return false;
+    }
 }

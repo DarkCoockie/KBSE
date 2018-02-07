@@ -22,7 +22,7 @@ public class PersistenceController implements Serializable{
     
     
     public PersistenceController(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("KBSE_ProjektPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Constants.Constants.PROJECT_PU_NAME);
         this.em = emf.createEntityManager();
        // emf.close();
     }
