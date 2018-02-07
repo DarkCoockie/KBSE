@@ -6,10 +6,9 @@
 package Persistence;
 
 import java.io.Serializable;
-import javax.inject.Named;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -21,6 +20,7 @@ public class Member implements Serializable {
     @Id
     private String name;
     private int points = 10;
+    private Map<Integer, Integer> entries = new HashMap<>();
 
     public Member() {
     }
@@ -44,6 +44,14 @@ public class Member implements Serializable {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public Map<Integer, Integer> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(Map<Integer, Integer> entries) {
+        this.entries = entries;
     }
     
 }
