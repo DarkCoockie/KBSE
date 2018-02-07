@@ -1,5 +1,4 @@
-
-build/*
-nbproject/private/private.properties
+build/
+nbproject/private/
 src/conf/persistence.xml
 *.class
