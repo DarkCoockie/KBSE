@@ -54,8 +54,9 @@ public class Index implements Serializable{
     }
     
     public String deleteEntry(int id){
-        if( !this.vc.deleteEntry(id).equals(Constants.Constants.SUCCESS)){
-           //TODO Fehlermeldung Ausgeben
+        String erg;
+        if( !(erg = this.vc.deleteEntry(id)).equals(Constants.Constants.SUCCESS)){
+           hints.addHint(erg);
            return Constants.Constants.INDEX_PAGE;
        }
        return Constants.Constants.INDEX_PAGE;
