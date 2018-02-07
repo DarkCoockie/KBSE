@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-Feb-2018, 12:19:32
+    Author     : Marcel
+*/
+
+.h1{
+    color: black;
+    font-size: xx-large;
+}
+
+.h2{
+    color: black;
+    font-size: x-large;
+}
+
+.h3{
+    color: black;
+    font-size: large;
+}
+
+.login{
+    text-align: right;
+}
+
+.container{
+    align-self: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 5%;
+    min-height: 75vh;
+}

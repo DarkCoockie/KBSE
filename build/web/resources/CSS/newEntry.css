@@ -8,31 +8,3 @@ and open the template in the editor.
     Author     : Marcel
 */
 
-.h1{
-    color: black;
-    font-size: xx-large;
-}
-
-.h2{
-    color: black;
-    font-size: x-large;
-}
-
-.h3{
-    color: black;
-    font-size: large;
-}
-
-.login{
-    text-align: right;
-}
-
-.container{
-    align-self: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding: 5%;
-    min-height: 75vh;
-}
