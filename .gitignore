@@ -2,3 +2,4 @@
 build/*
 nbproject/private/private.properties
 src/conf/persistence.xml
+*.class
