@@ -43,25 +43,25 @@ public class PersistenceController implements Serializable{
         return Constants.Constants.SUCCESS;
     }
     
-    public String addEntry(Entry e){
+    public String persitObject(Object o){
         this.em.getTransaction().begin();
         try{
-            this.em.persist(e);
+            this.em.persist(o);
             this.em.getTransaction().commit();
         }catch(Exception ex){
             if(this.em.getTransaction().isActive()){
                 this.em.getTransaction().rollback();
-                return Constants.ErrorMessages.CANT_PERSIST_ENTRY;
+                return Constants.ErrorMessages.CANT_PERSIST_OBJECT;
             }
         }
         return Constants.Constants.SUCCESS;
     }
     
-    public boolean deleteEntry(Entry e){
+    public boolean deleteObject(Object o){
         boolean erg = true;
         this.em.getTransaction().begin();
         try{
-            this.em.remove(e);
+            this.em.remove(o);
             this.em.getTransaction().commit();
         }catch(Exception ex){ 
             erg = false;

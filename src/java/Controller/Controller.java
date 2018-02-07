@@ -38,7 +38,7 @@ public class Controller implements Serializable {
     }
     
     public void addEntry(Persistence.Entry entry){   
-        if(this.pc.addEntry(entry) == Constants.Constants.SUCCESS){
+        if(this.pc.persitObject(entry).equals(Constants.Constants.SUCCESS)){
              this.entries.add(entry);
         }
     }
@@ -46,7 +46,7 @@ public class Controller implements Serializable {
     public String deleteEntry(int id){
         Persistence.Entry target = null;
         if(( target = this.pc.findEntry(id) ) != null) {
-          return this.pc.deleteEntry(target) ? Constants.Constants.SUCCESS : Constants.ErrorMessages.CANT_DELETE_ENTRY;
+          return this.pc.deleteObject(target) ? Constants.Constants.SUCCESS : Constants.ErrorMessages.CANT_DELETE_ENTRY;
         }
         return Constants.ErrorMessages.CANT_FIND_ENTRY;
     }
