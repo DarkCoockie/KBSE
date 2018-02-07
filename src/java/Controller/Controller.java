@@ -21,12 +21,13 @@ import javax.inject.Named;
 @Dependent
 public class Controller implements Serializable {
     private List<Persistence.Entry> entries;
-    private List<Persistence.User> users;
+    private List<Persistence.Member> users;
     private PersistenceController pc = new PersistenceController();
     
     @PostConstruct
     private void init(){
         this.entries = new ArrayList<>();
+        this.users = new ArrayList<>();
     }
     
     private void updateEntryList(){
@@ -63,31 +64,31 @@ public class Controller implements Serializable {
     }
     
     private void updateUserList(){
-        this.entries = pc.getAllEntrys();
+        this.users = pc.getAllUsers();
     }
     
-    public List<Persistence.User> getUsers(){
+    public List<Persistence.Member> getUsers(){
         this.updateUserList();
         return this.users;
     }
     
-    public void addUser(Persistence.User user){   
-        if(this.pc.addUser(user) == Constants.Constants.SUCCESS){
+    public void addUser(Persistence.Member user){   
+        if(this.pc.persitObject(user) == Constants.Constants.SUCCESS){
              this.users.add(user);
         }
     }
     
     public String deleteUser(String name){
-        Persistence.User target = null;
+        Persistence.Member target = null;
         if(( target = this.pc.findUser(name) ) != null) {
           return this.pc.deleteObject(target) ? Constants.Constants.SUCCESS : Constants.ErrorMessages.CANT_DELETE_USER;
         }
         return Constants.ErrorMessages.CANT_FIND_ENTRY;
     }
     
-    public Persistence.User getUser(String name)
+    public Persistence.Member getUser(String name)
     {
-        for(Persistence.User user : this.getUsers())
+        for(Persistence.Member user : this.getUsers())
         {
             if(user.getName().equals(name))
                 return user;

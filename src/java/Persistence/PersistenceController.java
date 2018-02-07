@@ -31,6 +31,10 @@ public class PersistenceController implements Serializable{
         return this.em.find(Entry.class, id);
     }
     
+    public Member findUser(String userName){
+        return this.em.find(Member.class, userName);
+    }
+    
     public String mergeEntry(Entry e){
         Entry eTemp = this.em.find(e.getClass(), e.getId());
         if(eTemp == null){
@@ -38,6 +42,18 @@ public class PersistenceController implements Serializable{
         }
         this.em.getTransaction().begin();
         this.em.merge(e);
+        this.em.getTransaction().commit();
+        
+        return Constants.Constants.SUCCESS;
+    }
+    
+     public String mergeUser(Member u){
+        Member uTemp = this.em.find(u.getClass(), u.getName());
+        if(uTemp == null){
+            return Constants.ErrorMessages.CANT_MERGE_ENTRY;
+        }
+        this.em.getTransaction().begin();
+        this.em.merge(u);
         this.em.getTransaction().commit();
         
         return Constants.Constants.SUCCESS;
@@ -74,6 +90,15 @@ public class PersistenceController implements Serializable{
         //list.addAll(em.createNamedQuery("Entry.all", Entry.class).getResultList());
         
        list.addAll(em.createQuery("SELECT e FROM Entry e", Entry.class).getResultList());
+        
+        return list;
+    }
+    
+     public List<Member> getAllUsers(){
+        List<Member> list = new ArrayList<>();
+        //list.addAll(em.createNamedQuery("Entry.all", Entry.class).getResultList());
+        
+       list.addAll(em.createQuery("SELECT m FROM Member m", Member.class).getResultList());
         
         return list;
     }

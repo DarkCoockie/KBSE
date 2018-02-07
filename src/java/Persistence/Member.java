@@ -6,6 +6,7 @@
 package Persistence;
 
 import java.io.Serializable;
+import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +17,12 @@ import javax.persistence.Id;
  * @author Marcel
  */
 @Entity
-public class User implements Serializable {
+public class Member implements Serializable {
     @Id
     private String name;
     private int points = 0;
 
-    public User(){}
+    public Member(){}
 
     public String getName() {
         return name;

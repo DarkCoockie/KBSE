@@ -63,7 +63,7 @@ public class Index implements Serializable{
     
     public boolean userHasPoints()
     {
-        Persistence.User user = this.vc.getUser();
+        Persistence.Member user = this.vc.getUser();
         if(user == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
@@ -75,7 +75,7 @@ public class Index implements Serializable{
     
     public boolean isAuthor(int id)
     {
-        Persistence.User user = this.vc.getUser();
+        Persistence.Member user = this.vc.getUser();
         if(user == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
