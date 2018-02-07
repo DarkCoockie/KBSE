@@ -47,12 +47,21 @@
                     <h:outputText value="#{entry.name}"/>
                     <span style="display:inline-block; width: 10px;"></span>
                     <h:outputText value="#{entry.stars}"/>
-                    <h:commandButton action="#{index.incrementEntry(entry.id)}" styleClass="incImg" 
-                                     rendered="#{login.loggedIn() and index.userHasPoints(login.username) and 
-                                                 !index.isAuthor(entry.id, login.username)}"/>
-                    <h:commandButton action="#{index.decrementEntry(entry.id)}" styleClass="decImg"
-                                     rendered="#{login.loggedIn() and entry.hasStars() and
-                                                 !index.isAuthor(entry.id, login.username)}"/>
+                    <span style="display:inline-block; width: 10px;"></span>
+                    <div class="incdec">
+                        <h:commandLink action="#{index.incrementEntry(entry.id)}"
+                                       rendered="#{login.loggedIn() and index.userHasPoints(login.username) and 
+                                                     !index.isAuthor(entry.id, login.username)}"> 
+                            <h:graphicImage name="images/button_inc.png" alt="Img" class="decImg"/>
+                        </h:commandLink>
+                        <span style="display:inline-block; width: 5px;"></span>
+                        <h:commandLink action="#{index.decrementEntry(entry.id)}"
+                                       rendered="#{login.loggedIn() and entry.hasStars() and
+                                            !index.isAuthor(entry.id, login.username)}"> 
+                            <h:graphicImage name="images/button_dec.png" alt="Img" class="decImg"/>
+                        </h:commandLink>
+                    </div>
+                    <span style="display:inline-block; width: 10px;"></span>
                     <h:commandButton value="löschen" action="#{index.deleteEntry(entry.id)}"></h:commandButton>
                 </h:form>
             </ui:repeat>

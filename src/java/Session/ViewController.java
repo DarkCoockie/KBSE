@@ -100,6 +100,12 @@ public class ViewController implements Serializable{
         if(entry == null)
             return Constants.ErrorMessages.CANT_FIND_ENTRY;
         
+        Persistence.Member user = this.controler.getUser(this.username);
+        if(user == null)
+            return Constants.ErrorMessages.CANT_FIND_USER;
+        
+        user.setPoints(user.getPoints() - 1);
+        
         entry.setStars(entry.getStars() + 1);
         
         return Constants.Constants.SUCCESS;
@@ -110,6 +116,12 @@ public class ViewController implements Serializable{
         Persistence.Entry entry = this.controler.getEntry(id);
         if(entry == null)
             return Constants.ErrorMessages.CANT_FIND_ENTRY;
+        
+        Persistence.Member user = this.controler.getUser(this.username);
+        if(user == null)
+            return Constants.ErrorMessages.CANT_FIND_USER;
+        
+        user.setPoints(user.getPoints() + 1);
         
         entry.setStars(entry.getStars() - 1);
         
