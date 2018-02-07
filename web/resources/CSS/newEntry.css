@@ -26,3 +26,13 @@ and open the template in the editor.
 .login{
     text-align: right;
 }
+
+.container{
+    align-self: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 5%;
+    min-height: 75vh;
+}

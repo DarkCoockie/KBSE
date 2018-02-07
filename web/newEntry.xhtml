@@ -7,59 +7,59 @@
         <title>Webseiten Bewertung</title>
         <h:outputStylesheet library="CSS" name="newEntry.css"  />
     </h:head>
-    <h:body>
-        
-        <!-- Standard Head ################################################# -->
-        <h:form>
-            <h:outputText styleClass="h1" value="Neuer Eintrag"/>
-        </h:form>
-        <br/>
-        
-        <ui:repeat var="message" value="#{hints.hints}">
+    <h:body style="background-color: #262626">
+        <div class="container" style="background-color: #f2f2f2">
+            <!-- Standard Head ################################################# -->
             <h:form>
-                <h:outputText value="- "/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:outputText value="#{message}"/>
+                <h:outputText styleClass="h1" value="Neuer Eintrag"/>
             </h:form>
-        </ui:repeat>
-        
-        <br/>
-        <h:form styleClass="login">
-            <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
-            <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
-            
-            <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
-            <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
-        </h:form>
-        <!-- Standard Head end ############################################# -->
-        
-        <h:form>
-            <!-- Name-->
-            <h:outputText value="Name der Seite" style="font-weight: bold"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:inputText value="#{newEntry.entryName}"/>
-            <br/><br/>
-            
-            <!-- URL-->
-            <h:outputText value="URL" style="font-weight: bold"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:inputText value="#{newEntry.entryUrl}"/>
-            <br/><br/>
-            
-            <!-- Description-->
-            <h:outputText value="Beschreibung" style="font-weight: bold"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:inputText value="#{newEntry.entryDescription}"/>
-            <br/><br/>
-            
-            <!-- Confirm-->
-            <h:commandButton value="Bestätigen" action="#{newEntry.confirm()}"/>
-        </h:form>
-        
+            <br/>
+
+            <ui:repeat var="message" value="#{hints.hints}">
+                <h:form>
+                    <h:outputText value="- "/>
+                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:outputText value="#{message}"/>
+                </h:form>
+            </ui:repeat>
+
+            <br/>
+            <h:form styleClass="login">
+                <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
+                <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
+
+                <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
+                <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
+            </h:form>
+            <!-- Standard Head end ############################################# -->
+
+            <h:form>
+                <!-- Name-->
+                <h:outputText value="Name der Seite" style="font-weight: bold"/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:inputText value="#{newEntry.entryName}"/>
+                <br/><br/>
+
+                <!-- URL-->
+                <h:outputText value="URL" style="font-weight: bold"/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:inputText value="#{newEntry.entryUrl}"/>
+                <br/><br/>
+
+                <!-- Description-->
+                <h:outputText value="Beschreibung" style="font-weight: bold"/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:inputText value="#{newEntry.entryDescription}"/>
+                <br/><br/>
+
+                <!-- Confirm-->
+                <h:commandButton value="Bestätigen" action="#{newEntry.confirm()}"/>
+            </h:form>
+        </div>
     </h:body>
 </html>
 

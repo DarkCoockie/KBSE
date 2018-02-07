@@ -7,46 +7,48 @@
         <title>Webseiten Bewertung</title>
         <h:outputStylesheet library="CSS" name="index.css"  />
     </h:head>
-    <h:body>
-        <h:form>
-            <h:outputText styleClass="h1" value="Webseiten Bewertung"/>
-        </h:form>
-        <br/>
-        
-        <ui:repeat var="message" value="#{hints.hints}">
+    <h:body style="background-color: #262626">
+        <div class="container" style="background-color: #f2f2f2">
             <h:form>
-                <h:outputText value="- "/>
+                <h:outputText styleClass="h1" value="Webseiten Bewertung"/>
+            </h:form>
+            <br/>
+
+            <ui:repeat var="message" value="#{hints.hints}">
+                <h:form>
+                    <h:outputText value="- "/>
+                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:outputText value="#{message}"/>
+                </h:form>
+            </ui:repeat>
+
+            <br/>
+
+            <h:form>
                 <span style="display:inline-block; width: 5px;"></span>
-                <h:outputText value="#{message}"/>
+                <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}"/>
             </h:form>
-        </ui:repeat>
-        
-        <br/>
-        
-        <h:form>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}"/>
-        </h:form>
-        
-        <h:form styleClass="login">
-            <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
-            <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
-            
-            <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
-            <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
-            <span style="display:inline-block; width: 5px;"></span>
-            <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
-        </h:form>
-        
-        <ui:repeat var="entry" value="#{index.entries}">
-            <h:form>
-                <h:outputText value="#{entry.name}"/>
-                <span style="display:inline-block; width: 10px;"></span>
-                <h:outputText value="#{entry.stars}"/>
+
+            <h:form styleClass="login">
+                <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
+                <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
+
+                <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
+                <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
+                <span style="display:inline-block; width: 5px;"></span>
+                <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
             </h:form>
-        </ui:repeat>
+
+            <ui:repeat var="entry" value="#{index.entries}">
+                <h:form>
+                    <h:outputText value="#{entry.name}"/>
+                    <span style="display:inline-block; width: 10px;"></span>
+                    <h:outputText value="#{entry.stars}"/>
+                </h:form>
+            </ui:repeat>
+        </div>
     </h:body>
 </html>
 
