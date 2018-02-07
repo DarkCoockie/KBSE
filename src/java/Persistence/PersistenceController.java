@@ -50,7 +50,7 @@ public class PersistenceController implements Serializable{
      public String mergeUser(Member u){
         Member uTemp = this.em.find(u.getClass(), u.getName());
         if(uTemp == null){
-            return Constants.ErrorMessages.CANT_MERGE_ENTRY;
+            return Constants.ErrorMessages.CANT_MERGE_USER;
         }
         this.em.getTransaction().begin();
         this.em.merge(u);

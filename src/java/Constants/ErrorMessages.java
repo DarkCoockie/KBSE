@@ -18,8 +18,8 @@ public class ErrorMessages {
     public final static String CANT_PERSIST_OBJECT = "Entry can not be persisted!";
     public final static String CANT_DELETE_ENTRY = "Removing the Entry failed!";
     
-    public final static String CANT_FIND_USER = "Entry not Found!";
-    public final static String CANT_MERGE_USER = "Entry can not be merged!";
-    public final static String CANT_PERSIST_USER = "Entry can not be persisted!";
-    public final static String CANT_DELETE_USER = "Removing the Entry failed!";
+    public final static String CANT_FIND_USER = "User not Found!";
+    public final static String CANT_MERGE_USER = "User can not be merged!";
+    public final static String CANT_PERSIST_USER = "User can not be persisted!";
+    public final static String CANT_DELETE_USER = "Removing the User failed!";
 }
