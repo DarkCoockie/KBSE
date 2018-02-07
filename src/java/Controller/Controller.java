@@ -36,4 +36,14 @@ public class Controller implements Serializable {
     {
         this.entries.add(entry);
     }
+    
+    public Persistence.Entry getEntry(int id)
+    {
+        for(Persistence.Entry entry : this.getEntries())
+        {
+            if(entry.getId() == id)
+                return entry;
+        }
+        return null;
+    }
 }

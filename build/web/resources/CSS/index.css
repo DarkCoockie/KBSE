@@ -7,3 +7,16 @@ and open the template in the editor.
     Created on : 16.01.2018, 15:54:41
     Author     : Marcel
 */
+
+.incImg{
+    background: white url('resources/images/button_inc.png') no-repeat top;
+    width: 50px;
+    height: 50px;
+}
+
+.decImg{
+    background: white url('resources/images/button_dec.png') no-repeat top;
+    width: 20px;
+    height: 20px;
+}
+

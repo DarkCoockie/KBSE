@@ -91,4 +91,26 @@ public class ViewController implements Serializable{
         
         return Constants.Constants.SUCCESS;
     }
+    
+    public String incrementEntry(int id)
+    {
+        Persistence.Entry entry = this.controler.getEntry(id);
+        if(entry == null)
+            return Constants.ErrorMessages.ENTRY_NOT_FOUND;
+        
+        entry.setStars(entry.getStars() + 1);
+        
+        return Constants.Constants.SUCCESS;
+    }
+    
+    public String decrementEntry(int id)
+    {
+        Persistence.Entry entry = this.controler.getEntry(id);
+        if(entry == null)
+            return Constants.ErrorMessages.ENTRY_NOT_FOUND;
+        
+        entry.setStars(entry.getStars() - 1);
+        
+        return Constants.Constants.SUCCESS;
+    }
 }

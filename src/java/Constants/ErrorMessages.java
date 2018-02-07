@@ -12,4 +12,5 @@ package Constants;
 public class ErrorMessages {
     
     public final static String INVALID_INPUT = "Invalid Input!";
+    public final static String ENTRY_NOT_FOUND = "Entry not found!";
 }

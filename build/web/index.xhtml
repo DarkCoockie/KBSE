@@ -27,7 +27,7 @@
 
             <h:form>
                 <span style="display:inline-block; width: 5px;"></span>
-                <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}"/>
+                <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}" rendered="#{login.loggedIn()}"/>
             </h:form>
 
             <h:form styleClass="login">
@@ -47,6 +47,8 @@
                     <h:outputText value="#{entry.name}"/>
                     <span style="display:inline-block; width: 10px;"></span>
                     <h:outputText value="#{entry.stars}"/>
+                    <h:commandButton action="#{index.incrementEntry(entry.id)}" styleClass="incImg"/>
+                    <h:commandButton action="#{index.decrementEntry(entry.id)}" styleClass="decImg"/>
                 </h:form>
             </ui:repeat>
         </div>
