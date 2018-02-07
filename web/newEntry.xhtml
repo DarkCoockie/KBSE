@@ -28,13 +28,6 @@
             <h:form styleClass="login">
                 <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
                 <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
-
-                <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
-                <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
             </h:form>
             <!-- Standard Head end ############################################# -->
 
@@ -72,12 +65,12 @@
              <h:form>
                 <h:outputText styleClass="h1" value="Eigene Bewertung"/>
             </h:form>
-               <ui:repeat var="entry" value="#{index.entries}">
+               <ui:repeat var="entry" value="#{newEntry.entries}">
                 <h:form>
                     <h:outputText value="#{entry.name}"/>
                     <span style="display:inline-block; width: 10px;"></span>
                     <h:outputText value="#{entry.stars}"/>
-                    <h:commandButton value="löschen" action="#{index.deleteEntry(entry.id)}"></h:commandButton>
+                    <h:commandButton value="löschen" action="#{newEntry.deleteEntry(entry.id)}"></h:commandButton>
                 </h:form>
             </ui:repeat>
         </div>

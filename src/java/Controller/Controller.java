@@ -39,6 +39,10 @@ public class Controller implements Serializable {
         return this.entries;
     }
     
+     public List<Persistence.Entry> getMemberEntries(String username){
+        return this.pc.getEntriesByMember(username);
+    }
+    
     public void addEntry(Persistence.Entry entry){   
         if(this.pc.persitObject(entry).equals(Constants.Constants.SUCCESS)){
              this.entries.add(entry);
@@ -95,5 +99,40 @@ public class Controller implements Serializable {
         }
         return null;
     }
+    
+     public String incrementEntry(int id, String username)
+    {
+        Persistence.Entry entry = this.getEntry(id);
+        if(entry == null)
+            return Constants.ErrorMessages.CANT_FIND_ENTRY;
+        
+        Persistence.Member user = this.getUser(username);
+        if(user == null)
+            return Constants.ErrorMessages.CANT_FIND_USER;
+        
+         String msg = user.incRating(entry);
+         if( !msg.equals(Constants.Constants.SUCCESS) ) return msg;
+         msg = this.pc.mergeUser(user);
+         if(!msg.equals(Constants.Constants.SUCCESS)) return msg;
+         return this.pc.mergeEntry(entry);
+    }
+    
+    public String decrementEntry(int id, String username)
+    {
+        Persistence.Entry entry = this.getEntry(id);
+        if(entry == null)
+            return Constants.ErrorMessages.CANT_FIND_ENTRY;
+        
+        Persistence.Member user = this.getUser(username);
+        if(user == null)
+            return Constants.ErrorMessages.CANT_FIND_USER;
+        
+         String msg = user.decRating(entry);
+         if( !msg.equals(Constants.Constants.SUCCESS) ) return msg;
+         msg = this.pc.mergeUser(user);
+         if(!msg.equals(Constants.Constants.SUCCESS)) return msg;
+         return this.pc.mergeEntry(entry);
+    }
+    
 }
 

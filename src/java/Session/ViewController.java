@@ -72,6 +72,11 @@ public class ViewController implements Serializable{
         return this.controler.getEntries();
     }
     
+    public List<Persistence.Entry> getMemberEntries()
+    {
+        return this.controler.getMemberEntries(this.username);
+    }
+    
     public String addEntry(Persistence.Entry entry)
     {
         if(!this.checkInput(entry.getName(), Constants.ForbiddenSigns.WEBSITE_NAME))
@@ -96,28 +101,12 @@ public class ViewController implements Serializable{
     
     public String incrementEntry(int id)
     {
-        Persistence.Entry entry = this.controler.getEntry(id);
-        if(entry == null)
-            return Constants.ErrorMessages.CANT_FIND_ENTRY;
-        
-        Persistence.Member user = this.controler.getUser(this.username);
-        if(user == null)
-            return Constants.ErrorMessages.CANT_FIND_USER;
-        
-        return user.incRating(entry);
+        return this.controler.incrementEntry(id, this.username);
     }
     
     public String decrementEntry(int id)
     {
-        Persistence.Entry entry = this.controler.getEntry(id);
-        if(entry == null)
-            return Constants.ErrorMessages.CANT_FIND_ENTRY;
-        
-        Persistence.Member user = this.controler.getUser(this.username);
-        if(user == null)
-            return Constants.ErrorMessages.CANT_FIND_USER;
-        
-        return user.decRating(entry);
+       return this.controler.decrementEntry(id, this.username);
     }
     
     public String deleteEntry(int id)

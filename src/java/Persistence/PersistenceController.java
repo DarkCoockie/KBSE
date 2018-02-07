@@ -31,6 +31,15 @@ public class PersistenceController implements Serializable{
         return this.em.find(Entry.class, id);
     }
     
+    public List<Entry> getEntriesByMember(String username){
+        List<Entry> list = new ArrayList<>();
+        list.addAll(em.createQuery("SELECT e FROM Entry e WHERE e.userName = :user", Entry.class)
+                .setParameter("user", username)
+                .getResultList());
+        
+        return list;
+    }
+    
     public Member findUser(String userName){
         return this.em.find(Member.class, userName);
     }

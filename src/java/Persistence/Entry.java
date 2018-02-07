@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,7 +28,6 @@ public class Entry implements Serializable {
     private String description;
     private String url;
     private int stars = 0;
-    @ManyToOne(targetEntity=Member.class, cascade=CascadeType.ALL)
     private String userName;
 
     public Entry(){}

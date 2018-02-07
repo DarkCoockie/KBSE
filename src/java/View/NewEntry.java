@@ -45,7 +45,7 @@ public class NewEntry implements Serializable {
     
     public List<Persistence.Entry> getEntries()
     {
-        return this.vc.getEntries();
+        return this.vc.getMemberEntries();
     }
     
       public String deleteEntry(int id){
