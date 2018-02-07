@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Webseiten Bewertung</title>
         <h:outputStylesheet library="CSS" name="index.css"  />
@@ -42,6 +43,7 @@
                 <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
             </h:form>
 
+           
             <ui:repeat var="entry" value="#{index.entries}">
                 <h:form>
                     <h:outputText value="#{entry.name}"/>
@@ -53,7 +55,6 @@
                     <h:commandButton action="#{index.decrementEntry(entry.id)}" styleClass="decImg"
                                      rendered="#{login.loggedIn() and entry.hasStars() and
                                                  !index.isAuthor(entry.id, login.username)}"/>
-                    <h:commandButton value="löschen" action="#{index.deleteEntry(entry.id)}"></h:commandButton>
                 </h:form>
             </ui:repeat>
         </div>

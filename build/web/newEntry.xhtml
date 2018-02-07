@@ -69,6 +69,17 @@
                 <!-- Confirm-->
                 <h:commandButton class="left" value="Bestätigen" action="#{newEntry.confirm()}"/>
             </h:form>
+             <h:form>
+                <h:outputText styleClass="h1" value="Eigene Bewertung"/>
+            </h:form>
+               <ui:repeat var="entry" value="#{index.entries}">
+                <h:form>
+                    <h:outputText value="#{entry.name}"/>
+                    <span style="display:inline-block; width: 10px;"></span>
+                    <h:outputText value="#{entry.stars}"/>
+                    <h:commandButton value="löschen" action="#{index.deleteEntry(entry.id)}"></h:commandButton>
+                </h:form>
+            </ui:repeat>
         </div>
     </h:body>
 </html>

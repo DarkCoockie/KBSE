@@ -43,6 +43,20 @@ public class NewEntry implements Serializable {
         return null;
     }
     
+    public List<Persistence.Entry> getEntries()
+    {
+        return this.vc.getEntries();
+    }
+    
+      public String deleteEntry(int id){
+        String erg;
+        if( !(erg = this.vc.deleteEntry(id)).equals(Constants.Constants.SUCCESS)){
+           hints.addHint(erg);
+           return Constants.Constants.INDEX_PAGE;
+       }
+       return Constants.Constants.INDEX_PAGE;
+    }
+    
     // Entry Get and Set ------------------------------------------------------
     
     public String getEntryName() {
