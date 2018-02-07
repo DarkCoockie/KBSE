@@ -1,1 +1,4 @@
 ./nbproject/private/private.properties
+build/web/WEB-INF/classes/META-INF/persistence.xml
+nbproject/private/private.properties
+src/conf/persistence.xml
