@@ -5,7 +5,7 @@ and open the template in the editor.
 */
 /* 
     Created on : 16.01.2018, 15:54:41
-    Author     : Marcel
+    Author     : Marcel and Timo
 */
 
 .incImg{
@@ -21,7 +21,7 @@ and open the template in the editor.
 }
 
 .incdec{
-    width: 50px;
-    overflow: hidden;
-    display: inline-block;
+    /* width: 50px; */
+    /* overflow: hidden; */
+    /* display: inline-block; */
 }

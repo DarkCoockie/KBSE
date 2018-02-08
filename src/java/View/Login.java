@@ -50,9 +50,10 @@ public class Login {
         }
     }
     
-    public void logout()
+    public String logout()
     {
         this.vc.logout();
+        return Constants.Constants.INDEX_PAGE;
     }
     
 }

@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .left{
-    width: 10vw;
+    width: 11vw;
     display: inline-block;
     overflow: hidden;
 }
@@ -17,4 +17,49 @@ and open the template in the editor.
 .right{
     width: 10vw;
     display: inline-block;
+}
+
+
+.new-entry-box {
+    background-color: #fff;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0px 2px 2px -2px;
+}
+
+.left-box {
+    float: left;
+    width: 49%;
+}
+
+.right-box {
+    float: right;
+    width: 50%;
+}
+
+.new-entry-box h3 {
+    margin: 0;
+}
+
+.new-entry-box table {
+    width: 100%;
+}
+
+.new-entry-box input[type="text"] {
+    width: 100%;
+}
+
+.new-entry-box textarea {
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 60px;
+}
+
+.new-entry-box table td {
+    padding: 5px 0;
+    vertical-align: top;
+}
+
+.new-entry-box i.material-icons {
+    vertical-align: text-bottom;
 }

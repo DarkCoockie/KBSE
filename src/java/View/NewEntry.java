@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,14 +21,25 @@ import javax.inject.Named;
 @RequestScoped
 public class NewEntry implements Serializable {
     @Inject Session.ViewController vc;
+    
     @Inject Hints hints;
     
     private Persistence.Entry entry;
     
+    public NewEntry(){
+       
+    }
+    
     @PostConstruct
     private void init()
     {
-        this.entry = new Persistence.Entry();
+        if(this.vc.getUsername() != null && this.vc.getUsername().equals("")) this.goBackToHome();
+        this.entry = new Persistence.Entry();   
+    }
+    
+    public void goBackToHome(){
+         FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, Constants.Constants.INDEX_PAGE);
     }
     
     public String confirm()

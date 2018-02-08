@@ -7,72 +7,89 @@
         <title>Webseiten Bewertung</title>
         <h:outputStylesheet library="CSS" name="newEntry.css"  />
         <h:outputStylesheet library="CSS" name="general.css"  />
+        <!-- Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet" />
     </h:head>
-    <h:body style="background-color: #262626">
-        <div class="container" style="background-color: #f2f2f2">
-            <!-- Standard Head ################################################# -->
-            <h:form>
-                <h:outputText styleClass="h1" value="Neuer Eintrag"/>
-            </h:form>
-            <br/>
+    <h:body>
+        <div class="hint-box">
+            <ul>
+                <ui:repeat var="message" value="#{hints.hints}">
+                    <li><a><h:outputText value="#{message}"/></a></li>
+                </ui:repeat>
+            </ul>
+        </div>
+        <div class="container">
+            <ui:include src="import/header.xhtml" />
+            <div class="left-box">
+                <div class="new-entry-box">
+                    <h3>Neuer Eintrag</h3>
+                    <hr />
+                    <h:form>
+                        <table>
+                            <tr>
+                                <td>
+                                    <!-- Name-->
+                                    <span><i class="material-icons">format_color_text</i> Name der Seite</span>
+                                </td>
+                                <td>
+                                    <h:inputText value="#{newEntry.entryName}"/>
+                                </td>
+                            </tr>  
+                            <tr>
+                                <td>
+                                    <!-- URL-->
 
-            <ui:repeat var="message" value="#{hints.hints}">
-                <h:form>
-                    <h:outputText value="- "/>
-                    <span style="display:inline-block; width: 5px;"></span>
-                    <h:outputText value="#{message}"/>
-                </h:form>
-            </ui:repeat>
+                                     <span><i class="material-icons">link</i> URL</span>
+                                </td>
+                                <td>
+                                    <h:inputText value="#{newEntry.entryUrl}"/>
+                                </td>
+                            </tr>   
+                            <tr>
+                                <td>
+                                    <!-- Description-->
 
-            <br/>
-            <h:form styleClass="login">
-                <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
-                <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
-            </h:form>
-            <!-- Standard Head end ############################################# -->
+                                    <span><i class="material-icons">description</i> Beschreibung</span>
+                                </td>
+                                <td>
+                                    <h:inputTextarea value="#{newEntry.entryDescription}"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- Confirm-->
+                        <h:commandButton class="bbtn-borderedd" value="Bestätigen" action="#{newEntry.confirm()}"/>
+                    </h:form>
+                </div>
+            </div>
+            <div class="right-box" >
+                <div class="new-entry-box">
+                    <h3>Eigene Beiträge</h3>
+                </div>
+                <ui:repeat var="entry" value="#{newEntry.entries}">
+                    <div class="entry-box">
+                        <div>
+                            <h3><h:outputText value="#{entry.name}" /></h3>
+                            <hr />
+                            <textarea disabled="true"><h:outputText value="#{entry.description}" /></textarea>
+                            <br />
+                            <i class="material-icons">link</i> <a href="#{entry.url}" >#{entry.url}</a>
+                        </div>
+                        <div>
+                            <h:form>
+                                <div>
+                                    <h:outputText styleClass="#{!login.loggedIn() or index.isAuthor(entry.id, login.username) ? 'center-counter' : ''}" value="#{entry.stars}"/>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div>
+                            <span>Erstellt von: <h:outputText value="#{entry.user}"/></span>
+                            <span>Bewertung: <h:outputText value="#{entry.stars}"/></span>
+                        </div>
+                    </div>
 
-            <h:form>
-                <!-- Name-->
-                <div class="left">
-                    <h:outputText value="Name der Seite" style="font-weight: bold"/>
-                </div>
-                <div class="right">
-                    <h:inputText value="#{newEntry.entryName}"/>
-                </div>
-                <br/><br/>
-
-                <!-- URL-->
-                <div class="left">
-                    <h:outputText value="URL" style="font-weight: bold"/>
-                </div>
-                <div class="right">
-                    <h:inputText value="#{newEntry.entryUrl}"/>
-                </div>
-                <br/><br/>
-
-                <!-- Description-->
-                <div class="left">
-                    <h:outputText value="Beschreibung" style="font-weight: bold"/>
-                </div>
-                <div class="right">
-                    <h:inputText value="#{newEntry.entryDescription}"/>
-                </div>
-                <br/><br/>
-
-                <!-- Confirm-->
-                <h:commandButton class="left" value="Bestätigen" action="#{newEntry.confirm()}"/>
-            </h:form>
-             <h:form>
-                <h:outputText styleClass="h1" value="Eigene Bewertung"/>
-            </h:form>
-               <ui:repeat var="entry" value="#{newEntry.entries}">
-                <h:form>
-                    <h:outputText value="#{entry.name}"/>
-                    <span style="display:inline-block; width: 10px;"></span>
-                    <h:outputText value="#{entry.stars}"/>
-                    <h:commandButton value="löschen" action="#{newEntry.deleteEntry(entry.id)}"></h:commandButton>
-                </h:form>
-            </ui:repeat>
+                </ui:repeat>  
+            </div>
         </div>
     </h:body>
 </html>

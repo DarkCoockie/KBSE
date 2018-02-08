@@ -8,64 +8,56 @@
         <title>Webseiten Bewertung</title>
         <h:outputStylesheet library="CSS" name="index.css"  />
         <h:outputStylesheet library="CSS" name="general.css"  />
+        <!-- Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" />
     </h:head>
-    <h:body style="background-color: #262626">
-        <div class="container" style="background-color: #f2f2f2">
-            <h:form>
-                <h:outputText styleClass="h1" value="Webseiten Bewertung"/>
-            </h:form>
-            <br/>
-
-            <ui:repeat var="message" value="#{hints.hints}">
-                <h:form>
-                    <h:outputText value="- "/>
-                    <span style="display:inline-block; width: 5px;"></span>
-                    <h:outputText value="#{message}"/>
-                </h:form>
-            </ui:repeat>
-
-            <br/>
-
-            <h:form>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:commandButton value="Neuer Eintrag" action="#{index.newEntry()}" rendered="#{login.loggedIn()}"/>
-            </h:form>
-
-            <h:form styleClass="login">
-                <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
-                <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:commandButton value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
-
-                <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
-                <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
-                <span style="display:inline-block; width: 5px;"></span>
-                <h:commandButton value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
-            </h:form>
-
-           
-            <ui:repeat var="entry" value="#{index.entries}">
-                <h:form>
-                    <h:outputText value="#{entry.name}"/>
-                    <span style="display:inline-block; width: 10px;"></span>
-                    <h:outputText value="#{entry.stars}"/>
-                    <span style="display:inline-block; width: 10px;"></span>
-                    <div class="incdec">
-                        <h:commandLink action="#{index.incrementEntry(entry.id)}"
-                                       rendered="#{login.loggedIn() and index.userHasPoints(login.username) and 
-                                                     !index.isAuthor(entry.id, login.username)}"> 
-                            <h:graphicImage name="images/button_inc.png" alt="Img" class="decImg"/>
-                        </h:commandLink>
-                        <span style="display:inline-block; width: 5px;"></span>
-                        <h:commandLink action="#{index.decrementEntry(entry.id)}"
-                                       rendered="#{login.loggedIn() and entry.hasStars() and
-                                            !index.isAuthor(entry.id, login.username) and
-                                            index.userHasSpentPoints(entry.id, login.username)}"> 
-                            <h:graphicImage name="images/button_dec.png" alt="Img" class="decImg"/>
-                        </h:commandLink>
+    <h:body>
+        <div class="hint-box">
+            <ul>
+                <ui:repeat var="message" value="#{hints.hints}">
+                    <li><a><h:outputText value="#{message}"/></a></li>
+                </ui:repeat>
+            </ul>
+        </div>
+        <div class="container">
+            <ui:include src="import/header.xhtml" />
+            <div class="entry-container" >
+                <ui:repeat var="entry" value="#{index.entries}">
+                    <div class="entry-box">
+                        <div>
+                            <h3><h:outputText value="#{entry.name}" /></h3>
+                            <hr />
+                            <textarea disabled="true"><h:outputText value="#{entry.description}" /></textarea>
+                            <br />
+                            <i class="material-icons">link</i> <a href="#{entry.url}" >#{entry.url}</a>
+                        </div>
+                        <div>
+                            <h:form>
+                                <div>
+                                    <h:commandLink action="#{index.incrementEntry(entry.id)}"
+                                                   rendered="#{login.loggedIn() and index.userHasPoints(login.username) and 
+                                                               !index.isAuthor(entry.id, login.username)}"> 
+                                        <i class="material-icons">keyboard_arrow_up</i>
+                                    </h:commandLink>
+                                    <h:outputText styleClass="#{!login.loggedIn() or index.isAuthor(entry.id, login.username) ? 'center-counter' : ''}" value="#{entry.stars}"/>
+                                    <h:commandLink action="#{index.decrementEntry(entry.id)}"
+                                                   rendered="#{login.loggedIn() and entry.hasStars() and
+                                                               !index.isAuthor(entry.id, login.username) and
+                                                               index.userHasSpentPoints(entry.id, login.username)}"> 
+                                       <i class="material-icons">keyboard_arrow_down</i>
+                                    </h:commandLink>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div>
+                            <span>Erstellt von: <h:outputText value="#{entry.user}"/></span>
+                            <span>Bewertung: <h:outputText value="#{entry.stars}"/></span>
+                        </div>
                     </div>
-                </h:form>
-            </ui:repeat>
+
+                </ui:repeat>  
+            </div>
         </div>
     </h:body>
 </html>

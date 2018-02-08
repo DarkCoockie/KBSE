@@ -8,6 +8,12 @@ and open the template in the editor.
     Author     : Marcel
 */
 
+:root{
+    --main-color: #006fde;
+    --error-color: #b31010;
+    --succsess-color: #139413;
+}
+
 .h1{
     color: black;
     font-size: xx-large;
@@ -27,20 +33,169 @@ and open the template in the editor.
     text-align: right;
 }
 
-.container{
-    align-self: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    padding-bottom: 5vw;
-    padding-top: 2vh;
-    min-height: 87vh;
-}
+.container{align-self:  center;margin: 0 auto;padding: 0;width: 1600px;}
 
 body{
+    font-family: Verdana;
     margin: 0;
     padding: 0;
+    background-color: #eee;
+}
+
+.head-bar {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin:  0 auto;
+    /* padding: 20px; */
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px -3px;
+}
+
+.head-bar ul {
+    margin:  0;
+    padding:  0;
+    width:  100%;
+    list-style: none;
+    display: inline-block;
+}
+
+.head-bar ul li {display: block;float: left;padding: 0;margin: 0 0 -3px 0;}
+
+.hint-box {
+    position: fixed;
+}
+
+input.nav-btn {border: none;background: none;margin: 0;color: var(--main-color);font-weight: bold;font-size: 17px;padding: 20px 30px;transition: all 0.3s ease-in-out;}
+
+input.nav-btn:hover {
+    background-color: var(--main-color);
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #444;
+    transition: 0.3s ease-in-out;
+    outline: none;
+}
+
+input[type="text"]:hover {
+    border-color: var(--main-color);
+}
+
+input.login-btn {
+    border: none;
+    padding: 22px;
+    font-size: 14px;
+    color: #444;
+    transition:  all 0.3s ease-in-out;
+}
+
+:hover {}
+
+input.login-btn:hover {
+    color: #fff;
+    cursor: pointer;
+    background-color: var(--main-color);
+}
+
+.hint-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hint-box ul a {
+    display: block;
+    padding: 20px 30px;
+    margin: 20px;
+    background-color: #0095ff52;
+    border: 2px solid #0095ff;
+}
+
+.entry-box {
+    margin: 10px 40px;
+    padding: 0;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px -2px;
+    clear: both;
+}
+
+.entry-box div:first-child {
+    width: 88%;
+    float: left;
+    padding: 20px 0px 20px 30px;
+}
+
+.entry-box div:last-child {
+    clear: both;
+    padding: 10px 30px;
+    background-color: #f0f0f0;
+    box-shadow: inset 0px 2px 2px -2px;
+}
+
+.entry-box div:first-child h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.entry-box div:first-child hr {}
+
+.entry-box div:first-child span {}
+
+.entry-box div:last-child span:first-child {}
+
+.entry-box div:last-child span:last-child {
+    float: right;
+}
+
+.entry-box div:first-child textarea {
+    width:  100%;
+    max-width:  100%;
+    min-height:  50px;
+    background-color: #fff;
+    border: none;
+    color: #000;
+    font-family: Verdana;
+}
+
+.entry-box div:nth-child(2) {text-align: center;}
+
+.entry-box div:nth-child(2) i.material-icons {
+    color: #000;
+    font-size: 60px;
+}
+
+.entry-box div:nth-child(2) span {
+    margin: 0;
+    display: block;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+.entry-box .center-counter {
+    padding: 64px 0;
+}
+
+.entry-box i.material-icons {
+    vertical-align: middle;
+}
+
+input.bbtn-borderedd {
+    border: 1px solid var(--succsess-color);
+    background-color: #fff;
+    font-size: 18px;
+    padding: 20px;
+    width: 100%;
+    transition:  0.3s ease-in-out;
+}
+
+input.bbtn-borderedd:hover {
+    background-color: var(--succsess-color);
+    color: #fff;
+    cursor: pointer;
 }

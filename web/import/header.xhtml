@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <div class="head-bar">
+        <ul>
+            <li><h:form>
+                    <h:commandButton class="nav-btn" value="Home" action="#{head.getHome()}" />
+                </h:form>
+            </li>
+
+            <li><h:form>
+                    <h:commandButton class="nav-btn" value="Eigene Beiträge" action="#{head.getMemberPage()}" rendered="#{login.loggedIn()}" />
+                </h:form>
+            </li>
+            
+            <li style="float : right;"> 
+                <h:form styleClass="login">
+                    <h:outputText value="Eingeloogt als: " rendered="#{login.loggedIn()}"/>
+                    <h:outputText value="#{login.username}" rendered="#{login.loggedIn()}"/>
+                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:commandButton class="login-btn" value="Logout" rendered="#{login.loggedIn()}" action="#{login.logout()}"/>
+
+                    <h:outputText value="Login: " rendered="#{!login.loggedIn()}"/>
+                    <h:inputText value="#{login.username}"  rendered="#{!login.loggedIn()}"/>
+                    <span style="display:inline-block; width: 5px;"></span>
+                    <h:commandButton class="login-btn" value="Login" rendered="#{!login.loggedIn()}" action="#{login.login()}"/>
+                </h:form>
+            </li>
+        </ul>
+    </div>
+</html>
