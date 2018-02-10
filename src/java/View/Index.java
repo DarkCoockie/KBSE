@@ -5,6 +5,7 @@
  */
 package View;
 
+import Persistence.Entry;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -22,6 +23,24 @@ public class Index implements Serializable{
     @Inject Session.ViewController vc;
     @Inject Hints hints;
     
+    private String searchString;
+    private List<Persistence.Entry> searchResults;
+
+    public List<Entry> getSearchResults() {
+        return this.searchResults;
+    }
+
+    public void setSearchResults(List<Entry> searchResults) {
+        this.searchResults = searchResults;
+    }
+
+    public String getSearchString() {
+        return this.searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
+    }
     
     public List<Persistence.Entry> getEntries()
     {
@@ -30,13 +49,13 @@ public class Index implements Serializable{
     
     public String newEntry()
     {
-        return Constants.Constants.NEW_ENTRY_PAGE;
+        return Constants.General.NEW_ENTRY_PAGE;
     }
     
     public void incrementEntry(int id)
     {
         String returnMessage = this.vc.incrementEntry(id);
-        if(!returnMessage.equals(Constants.Constants.SUCCESS))
+        if(!returnMessage.equals(Constants.General.SUCCESS))
         {
             this.hints.addHint(returnMessage);
         }
@@ -45,7 +64,7 @@ public class Index implements Serializable{
     public void decrementEntry(int id)
     {
         String returnMessage = this.vc.decrementEntry(id);
-        if(!returnMessage.equals(Constants.Constants.SUCCESS))
+        if(!returnMessage.equals(Constants.General.SUCCESS))
         {
             this.hints.addHint(returnMessage);
         }

@@ -39,16 +39,16 @@ public class NewEntry implements Serializable {
     
     public void goBackToHome(){
          FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, Constants.Constants.INDEX_PAGE);
+        facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, Constants.General.INDEX_PAGE);
     }
     
     public String confirm()
     {
         this.entry.setUser(this.vc.getUsername());
         String message = this.vc.addEntry(this.entry);
-        if(message.equals(Constants.Constants.SUCCESS))
+        if(message.equals(Constants.General.SUCCESS))
         {
-            return Constants.Constants.INDEX_PAGE;
+            return Constants.General.INDEX_PAGE;
         }
         this.hints.addHint(message);
         
@@ -62,11 +62,11 @@ public class NewEntry implements Serializable {
     
       public String deleteEntry(int id){
         String erg;
-        if( !(erg = this.vc.deleteEntry(id)).equals(Constants.Constants.SUCCESS)){
+        if( !(erg = this.vc.deleteEntry(id)).equals(Constants.General.SUCCESS)){
            hints.addHint(erg);
-           return Constants.Constants.INDEX_PAGE;
+           return Constants.General.INDEX_PAGE;
        }
-       return Constants.Constants.INDEX_PAGE;
+       return Constants.General.INDEX_PAGE;
     }
     
     // Entry Get and Set ------------------------------------------------------

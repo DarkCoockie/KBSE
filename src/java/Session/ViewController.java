@@ -6,6 +6,7 @@
 package Session;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -36,7 +37,7 @@ public class ViewController implements Serializable{
         
         this.controler.addUser(new Persistence.Member(username));
         
-        return Constants.Constants.SUCCESS;
+        return Constants.General.SUCCESS;
     }
     
     public void logout()
@@ -72,6 +73,11 @@ public class ViewController implements Serializable{
         return this.controler.getEntries();
     }
     
+    public List<Persistence.Entry> getEntriesStatic()
+    {
+        return this.controler.getEntriesStatic();
+    }
+    
     public List<Persistence.Entry> getMemberEntries()
     {
         return this.controler.getMemberEntries(this.username);
@@ -96,7 +102,7 @@ public class ViewController implements Serializable{
         
         this.controler.addEntry(entry);
         
-        return Constants.Constants.SUCCESS;
+        return Constants.General.SUCCESS;
     }
     
     public String incrementEntry(int id)
@@ -122,5 +128,20 @@ public class ViewController implements Serializable{
     public Persistence.Entry getEntry(int id)
     {
         return this.controler.getEntry(id);
+    }
+    
+    public List<Persistence.Entry> searchByTitle(String search)
+    {
+        List<Persistence.Entry> results = new ArrayList<>();
+        
+        for(Persistence.Entry entry : this.controler.getEntriesStatic())
+        {
+            if(entry.getName().contains(search))
+            {
+                results.add(entry);
+            }
+        }
+        
+        return results;
     }
 }

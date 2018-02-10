@@ -44,7 +44,7 @@ public class Login {
     public void login()
     {
         String message = this.vc.login(this.username);
-        if(!message.equals(Constants.Constants.SUCCESS))
+        if(!message.equals(Constants.General.SUCCESS))
         {
             this.allHints.addHint(message);
         }
@@ -53,7 +53,7 @@ public class Login {
     public String logout()
     {
         this.vc.logout();
-        return Constants.Constants.INDEX_PAGE;
+        return Constants.General.INDEX_PAGE;
     }
     
 }

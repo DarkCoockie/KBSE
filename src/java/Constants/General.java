@@ -9,11 +9,12 @@ package Constants;
  *
  * @author Marcel
  */
-public class Constants {
+public class General {
     public final static String SUCCESS = "success";
     
     public final static String PROJECT_PU_NAME = "KBSE_ProjektPU";
     
     public final static String NEW_ENTRY_PAGE = "/newEntry.xhtml?faces-redirect=true";
     public final static String INDEX_PAGE = "/index.xhtml?faces-redirect=true";
+    public final static String INDEX_PAGE_NO_REDIRECT = "/index.xhtml";
 }

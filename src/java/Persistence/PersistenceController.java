@@ -22,7 +22,7 @@ public class PersistenceController implements Serializable{
     
     
     public PersistenceController(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Constants.Constants.PROJECT_PU_NAME);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Constants.General.PROJECT_PU_NAME);
         this.em = emf.createEntityManager();
        // emf.close();
     }
@@ -53,7 +53,7 @@ public class PersistenceController implements Serializable{
         this.em.merge(e);
         this.em.getTransaction().commit();
         
-        return Constants.Constants.SUCCESS;
+        return Constants.General.SUCCESS;
     }
     
      public String mergeUser(Member u){
@@ -65,7 +65,7 @@ public class PersistenceController implements Serializable{
         this.em.merge(u);
         this.em.getTransaction().commit();
         
-        return Constants.Constants.SUCCESS;
+        return Constants.General.SUCCESS;
     }
     
     public String persitObject(Object o){
@@ -79,7 +79,7 @@ public class PersistenceController implements Serializable{
                 return Constants.ErrorMessages.CANT_PERSIST_OBJECT;
             }
         }
-        return Constants.Constants.SUCCESS;
+        return Constants.General.SUCCESS;
     }
     
     public boolean deleteObject(Object o){

@@ -39,12 +39,16 @@ public class Controller implements Serializable {
         return this.entries;
     }
     
+    public List<Persistence.Entry> getEntriesStatic(){
+        return this.entries;
+    }
+    
      public List<Persistence.Entry> getMemberEntries(String username){
         return this.pc.getEntriesByMember(username);
     }
     
     public void addEntry(Persistence.Entry entry){   
-        if(this.pc.persitObject(entry).equals(Constants.Constants.SUCCESS)){
+        if(this.pc.persitObject(entry).equals(Constants.General.SUCCESS)){
              this.entries.add(entry);
         }
     }
@@ -52,7 +56,7 @@ public class Controller implements Serializable {
     public String deleteEntry(int id){
         Persistence.Entry target = null;
         if(( target = this.pc.findEntry(id) ) != null) {
-          return this.pc.deleteObject(target) ? Constants.Constants.SUCCESS : Constants.ErrorMessages.CANT_DELETE_ENTRY;
+          return this.pc.deleteObject(target) ? Constants.General.SUCCESS : Constants.ErrorMessages.CANT_DELETE_ENTRY;
         }
         return Constants.ErrorMessages.CANT_FIND_ENTRY;
     }
@@ -77,7 +81,7 @@ public class Controller implements Serializable {
     }
     
     public void addUser(Persistence.Member user){   
-        if(this.pc.persitObject(user) == Constants.Constants.SUCCESS){
+        if(this.pc.persitObject(user) == Constants.General.SUCCESS){
              this.users.add(user);
         }
     }
@@ -85,7 +89,7 @@ public class Controller implements Serializable {
     public String deleteUser(String name){
         Persistence.Member target = null;
         if(( target = this.pc.findUser(name) ) != null) {
-          return this.pc.deleteObject(target) ? Constants.Constants.SUCCESS : Constants.ErrorMessages.CANT_DELETE_USER;
+          return this.pc.deleteObject(target) ? Constants.General.SUCCESS : Constants.ErrorMessages.CANT_DELETE_USER;
         }
         return Constants.ErrorMessages.CANT_FIND_ENTRY;
     }
@@ -111,9 +115,9 @@ public class Controller implements Serializable {
             return Constants.ErrorMessages.CANT_FIND_USER;
         
          String msg = user.incRating(entry);
-         if( !msg.equals(Constants.Constants.SUCCESS) ) return msg;
+         if( !msg.equals(Constants.General.SUCCESS) ) return msg;
          msg = this.pc.mergeUser(user);
-         if(!msg.equals(Constants.Constants.SUCCESS)) return msg;
+         if(!msg.equals(Constants.General.SUCCESS)) return msg;
          return this.pc.mergeEntry(entry);
     }
     
@@ -128,9 +132,9 @@ public class Controller implements Serializable {
             return Constants.ErrorMessages.CANT_FIND_USER;
         
          String msg = user.decRating(entry);
-         if( !msg.equals(Constants.Constants.SUCCESS) ) return msg;
+         if( !msg.equals(Constants.General.SUCCESS) ) return msg;
          msg = this.pc.mergeUser(user);
-         if(!msg.equals(Constants.Constants.SUCCESS)) return msg;
+         if(!msg.equals(Constants.General.SUCCESS)) return msg;
          return this.pc.mergeEntry(entry);
     }
     

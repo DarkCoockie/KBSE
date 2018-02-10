@@ -71,7 +71,7 @@ public class Member implements Serializable {
             entry.setStars(entry.getStars() + 1);
         }
         
-        return Constants.Constants.SUCCESS;
+        return Constants.General.SUCCESS;
     }
     
     public String decRating(Persistence.Entry entry)
@@ -91,6 +91,6 @@ public class Member implements Serializable {
         if(rating.equals(1))
             this.ratings.remove(entry.getId());
         
-        return Constants.Constants.SUCCESS;
+        return Constants.General.SUCCESS;
     }
 }

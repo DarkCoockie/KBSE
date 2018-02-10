@@ -18,10 +18,10 @@ import javax.inject.Named;
 public class Head implements Serializable{
     
     public String getHome(){
-        return Constants.Constants.INDEX_PAGE;
+        return Constants.General.INDEX_PAGE;
     }
     
     public String getMemberPage(){
-        return Constants.Constants.NEW_ENTRY_PAGE;
+        return Constants.General.NEW_ENTRY_PAGE;
     }
 }
