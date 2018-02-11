@@ -25,3 +25,58 @@ and open the template in the editor.
     /* overflow: hidden; */
     /* display: inline-block; */
 }
+
+
+.entry-box div:nth-child(2) span:first-child {
+    padding-top: 64px;
+}
+
+.entry-box div:nth-child(2) span:last-child {
+    padding-bottom: 64px;
+}
+
+.search-box {
+    width: 100%;
+    margin: 10px 0;
+    position: relative;
+    box-shadow: 0px 2px 4px -3px;
+}
+
+.search-box input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    font-size: 17px;
+    padding: 05px;
+    text-align: center;
+    background-color: #f7f7f7;
+}
+
+.search-box i.material-icons {
+    position: absolute;
+    right: 0;
+    padding: 2px;
+    top: 0;
+    opacity: 0;
+    font-size: 26px;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-box input[type="text"]:focus + i.material-icons:hover {
+    background-color: var(--main-color);
+    cursor: pointer;
+    color: #fff;
+}
+
+
+.search-box input[type="text"]:focus {
+    font-size: 30px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.search-box input[type="text"]:focus + i.material-icons {
+    font-size: 54px;
+    padding: 10px;
+    opacity: 1;
+}

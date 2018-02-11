@@ -63,3 +63,10 @@ and open the template in the editor.
 .new-entry-box i.material-icons {
     vertical-align: text-bottom;
 }
+
+a.del-btn {padding: 8px 20px;color: var(--error-color);transition:  all 0.3s ease-in-out;}
+
+a.del-btn:hover {
+    background-color: var(--error-color);
+    color: #fff;
+}

@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Webseiten Bewertung</title>
         <h:outputStylesheet library="CSS" name="index.css"  />
@@ -22,21 +23,24 @@
             </ul>
         </div>
         <div class="container">
-            
-            <h:form>
-                <h:inputText id="search" value="#{searchBean.searchString}" onkeypress="return event.keyCode != 13;">
-                    <f:ajax listener="#{searchBean.searchStringValueChanged}" render="output"/>
-                </h:inputText>
-                <h2>
-                    <ui:repeat var="entry" value="#{searchBean.searchResults}">
-                        <h:outputText id="output" value="#{entry.name}"></h:outputText>
-                    </ui:repeat>
-                </h2>
-                <h2><h:outputText id="output" value="#{searchBean.searchString}" />
-                </h2>
-            </h:form>
-
             <ui:include src="import/header.xhtml" />
+                 <div class="search-box">
+                <h:form>
+                    <h:inputText a:placeholder="Suchen" id="search" value="#{searchBean.searchString}" onkeypress="return event.keyCode != 13;">
+                        <f:ajax listener="#{searchBean.searchStringValueChanged}" render="output"/>
+                    </h:inputText>
+                    <i class="material-icons">search</i>
+                </h:form>
+            </div>
+            <h2>
+                <ui:repeat var="entry" value="#{searchBean.searchResults}">
+                    <h:outputText id="output" value="#{entry.name}"></h:outputText>
+                </ui:repeat>
+            </h2>
+            <h2>
+                <h:outputText id="output" value="#{searchBean.searchString}" />
+            </h2>
+            
             <div class="entry-container" >
                 <ui:repeat var="entry" value="#{index.entries}">
                     <div class="entry-box">

@@ -10,8 +10,8 @@ and open the template in the editor.
 
 :root{
     --main-color: #006fde;
-    --error-color: #b31010;
-    --succsess-color: #139413;
+    --error-color: #e01818;
+    --succsess-color: #17a517;
 }
 
 .h1{
@@ -95,8 +95,6 @@ input.login-btn {
     transition:  all 0.3s ease-in-out;
 }
 
-:hover {}
-
 input.login-btn:hover {
     color: #fff;
     cursor: pointer;
@@ -134,8 +132,9 @@ input.login-btn:hover {
 .entry-box div:last-child {
     clear: both;
     padding: 10px 30px;
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
     box-shadow: inset 0px 2px 2px -2px;
+    position: relative;
 }
 
 .entry-box div:first-child h3 {

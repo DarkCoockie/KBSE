@@ -84,7 +84,11 @@
                         </div>
                         <div>
                             <span>Erstellt von: <h:outputText value="#{entry.user}"/></span>
-                            <span>Bewertung: <h:outputText value="#{entry.stars}"/></span>
+                            <h:form>
+                                <h:commandLink style="position: absolute; top: 0; right: 0;" class="del-btn" action="#{newEntry.deleteEntry(entry.id)}">
+                                    <i class="material-icons">delete</i>
+                                </h:commandLink>
+                            </h:form>
                         </div>
                     </div>
 
