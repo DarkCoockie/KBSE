@@ -26,8 +26,15 @@ public class Entry implements Serializable {
     private String url;
     private int stars = 0;
     private String userName;
-
+    
     public Entry(){}
+    
+    public Entry(String name, String description, String url, String userName){
+        this.name = name;
+        this.description = description;
+        this.url = url;
+        this.userName = userName;
+    }
     
     public String getUser() {
         return userName;

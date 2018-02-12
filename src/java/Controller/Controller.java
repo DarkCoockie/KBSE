@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Persistence.Member;
 import Persistence.PersistenceController;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,8 +62,8 @@ public class Controller implements Serializable {
         return Constants.ErrorMessages.CANT_FIND_ENTRY;
     }
     
-    public Persistence.Entry getEntry(int id)
-    {
+    public Persistence.Entry getEntry(int id){
+        updateEntryList();
         for(Persistence.Entry entry : this.getEntries())
         {
             if(entry.getId() == id)
@@ -75,28 +76,32 @@ public class Controller implements Serializable {
         this.users = pc.getAllUsers();
     }
     
-    public List<Persistence.Member> getUsers(){
+    public List<Persistence.Member> getMembers(){
         this.updateUserList();
         return this.users;
     }
     
     public void addUser(Persistence.Member user){   
-        if(this.pc.persitObject(user) == Constants.General.SUCCESS){
+        if(this.pc.persitObject(user).equals(Constants.General.SUCCESS)){
              this.users.add(user);
         }
     }
     
+    public void mergeMember(Member m){
+        this.pc.mergeUser(m);
+    }
+    
     public String deleteUser(String name){
-        Persistence.Member target = null;
+        Member target = null;
         if(( target = this.pc.findUser(name) ) != null) {
           return this.pc.deleteObject(target) ? Constants.General.SUCCESS : Constants.ErrorMessages.CANT_DELETE_USER;
         }
         return Constants.ErrorMessages.CANT_FIND_ENTRY;
     }
     
-    public Persistence.Member getUser(String name)
+    public Member getMember(String name)
     {
-        for(Persistence.Member user : this.getUsers())
+        for(Member user : this.getMembers())
         {
             if(user.getName().equals(name))
                 return user;
@@ -110,7 +115,7 @@ public class Controller implements Serializable {
         if(entry == null)
             return Constants.ErrorMessages.CANT_FIND_ENTRY;
         
-        Persistence.Member user = this.getUser(username);
+        Persistence.Member user = this.getMember(username);
         if(user == null)
             return Constants.ErrorMessages.CANT_FIND_USER;
         
@@ -127,7 +132,7 @@ public class Controller implements Serializable {
         if(entry == null)
             return Constants.ErrorMessages.CANT_FIND_ENTRY;
         
-        Persistence.Member user = this.getUser(username);
+        Persistence.Member user = this.getMember(username);
         if(user == null)
             return Constants.ErrorMessages.CANT_FIND_USER;
         

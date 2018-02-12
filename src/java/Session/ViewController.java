@@ -122,7 +122,7 @@ public class ViewController implements Serializable{
     
     public Persistence.Member getUser(String username)
     {
-        return this.controler.getUser(username);
+        return this.controler.getMember(username);
     }
     
     public Persistence.Entry getEntry(int id)

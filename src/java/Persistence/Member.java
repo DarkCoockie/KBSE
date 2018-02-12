@@ -17,6 +17,7 @@ import javax.persistence.Id;
  */
 @Entity
 public class Member implements Serializable {
+
     @Id
     private String name;
     private int points = 10;
@@ -24,9 +25,8 @@ public class Member implements Serializable {
 
     public Member() {
     }
-
-    public Member(String name)
-    {
+    
+    public Member(String name) {
         this.name = name;
         this.ratings = new HashMap<>();
     }
@@ -54,43 +54,36 @@ public class Member implements Serializable {
     public void setRatings(Map<Integer, Integer> ratings) {
         this.ratings = ratings;
     }
-    
-    public String incRating(Persistence.Entry entry)
-    {
+
+    public String incRating(Persistence.Entry entry) {
         Integer rating = this.ratings.get(entry.getId());
-        if(rating != null)
-        {
-            this.ratings.put(entry.getId(), (int) rating +1);
+        if (rating != null) {
+            this.ratings.put(entry.getId(), (int) rating + 1);
             --this.points;
             entry.setStars(entry.getStars() + 1);
-        }
-        else
-        {
+        } else {
             this.ratings.put(entry.getId(), 1);
             --this.points;
             entry.setStars(entry.getStars() + 1);
         }
-        
+
         return Constants.General.SUCCESS;
     }
-    
-    public String decRating(Persistence.Entry entry)
-    {
+
+    public String decRating(Persistence.Entry entry) {
         Integer rating = this.ratings.get(entry.getId());
-        if(rating == null)
-        {
+        if (rating == null) {
             return Constants.ErrorMessages.CANT_FIND_ENTRY;
-        }
-        else
-        {
-            this.ratings.put(entry.getId(), (int) rating -1);
+        } else {
+            this.ratings.put(entry.getId(), (int) rating - 1);
             ++this.points;
             entry.setStars(entry.getStars() - 1);
         }
-        
-        if(rating.equals(1))
+
+        if (rating.equals(1)) {
             this.ratings.remove(entry.getId());
-        
+        }
+
         return Constants.General.SUCCESS;
     }
 }
