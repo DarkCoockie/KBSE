@@ -10,8 +10,7 @@ package Constants;
  * @author Marcel
  */
 public class OrderBy {
-    public final static String NAME = "orderbyname";
-    public final static String DATE = "orderbydate";
-    public final static String RATING = "orderbyrating";
-    public final static String CLICKS = "orderbyclicks";
+    public final static String NAME = "Name";
+    public final static String RATING = "Punkte";
+    public final static String USER = "Benutzer";
 }
