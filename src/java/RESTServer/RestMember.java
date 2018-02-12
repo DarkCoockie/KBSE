@@ -6,9 +6,7 @@
 package RESTServer;
 
 import Controller.Controller;
-import Persistence.Entry;
 import Persistence.Member;
-import java.math.BigDecimal;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.json.Json;
@@ -74,6 +72,32 @@ public class RestMember {
         Member m  = this.controller.getMember(o.getString("name"));
         if(m != null){
             m.setPoints(o.getInt("points"));
+            this.controller.mergeMember(m);
+            return memberToJson(m);
+        }
+        return Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build();
+    }
+    
+    @GET
+    @Path("/{memberId}/decPoints")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject decMemberPoints(@PathParam("memberId") String name){
+         Member m  = this.controller.getMember(name);
+        if(m != null){
+            m.setPoints(m.getPoints()-1);
+            this.controller.mergeMember(m);
+            return memberToJson(m);
+        }
+        return Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build();
+    }
+    
+    @GET
+    @Path("/{memberId}/incPoints")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject incMemberPoints(@PathParam("memberId") String name){
+         Member m  = this.controller.getMember(name);
+        if(m != null){
+            m.setPoints(m.getPoints()+1);
             this.controller.mergeMember(m);
             return memberToJson(m);
         }
