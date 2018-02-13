@@ -108,10 +108,11 @@ public class RestMember {
     
     @GET
     @Path("/{memberName}/login")
-    @Produces("text/plain")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response login(@PathParam("memberName") String name){
-        ViewController vc = new ViewController();
-         return Response.ok( vc.login(name)).header("Access-Control-Allow-Origin", "*").build();
+        Member m = new Member(name);
+        this.controller.addUser(m);
+         return Response.ok(Json.createObjectBuilder().add("status", "ok").add("name", m.getName()).build()).header("Access-Control-Allow-Origin", "*").build();
     }
     
     

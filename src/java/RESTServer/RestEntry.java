@@ -21,6 +21,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -30,7 +31,7 @@ import javax.ws.rs.core.Response;
  */
 @RequestScoped
 @Path("/entry")
-public class RestEnty {
+public class RestEntry {
 
     @Inject
     private Controller controller;
@@ -72,12 +73,23 @@ public class RestEnty {
         return Response.ok(Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_FIND_ENTRY).build()).header("Access-Control-Allow-Origin", "*").build();
     }
 
+    
     @POST
     @Produces("text/plain")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addEnty(JsonObject o) {
+    public Response addEntyPost(JsonObject o) {
         //TODO Bestätiegungs- oder Fehlermeldung zurück geben
         this.controller.addEntry(new Entry(o.getString("name"), o.getString("description"), o.getString("url"), o.getString("username")));
+        return Response.ok("").header("Access-Control-Allow-Origin", "*").build();
+    }
+    
+    @GET
+    @Path("/create")
+    @Produces("text/plain")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addEnty(@QueryParam("name") String name, @QueryParam("url") String url, @QueryParam("desc") String description, @QueryParam("user") String userName) {
+        //TODO Bestätiegungs- oder Fehlermeldung zurück geben
+        this.controller.addEntry(new Entry(name, description, url, userName));
         return Response.ok("").header("Access-Control-Allow-Origin", "*").build();
     }
 
@@ -107,8 +119,8 @@ public class RestEnty {
         return Response.ok("userName required!").header("Access-Control-Allow-Origin", "*").build();
     }
 
-    @DELETE
-    @Path("/{entryId}")
+    @GET
+    @Path("/delete/{entryId}")
     @Produces("text/plain")
     public Response deleteEntry(@PathParam("entryID") int id) {
         Entry e;

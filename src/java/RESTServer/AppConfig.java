@@ -30,7 +30,7 @@ public class AppConfig extends Application {
     }
     
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(RESTServer.RestEnty.class);
+        resources.add(RESTServer.RestEntry.class);
         resources.add(RESTServer.RestMember.class);
     }
 
