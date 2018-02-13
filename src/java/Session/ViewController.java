@@ -8,6 +8,7 @@ package Session;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -19,6 +20,8 @@ import javax.inject.Inject;
 public class ViewController implements Serializable{
     @Inject Controller.Controller controler;
     private String username = "";
+    private String searchOption;
+    private String searchString;
 
     /**
      * Set the identifier for the current session.
@@ -27,8 +30,31 @@ public class ViewController implements Serializable{
      * @return returns Constants.SUCCESS if input is valid,
      *         returns an error message otherwise
      */
-    public String login(String username)
+    
+    @PostConstruct
+    private void init()
     {
+        this.searchOption = Constants.OrderBy.NAME;
+        this.searchString = "";
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
+    }
+    
+    public String getSearchOption() {
+        return searchOption;
+    }
+    
+    public void setSearchOption(String searchOption) {
+        this.searchOption = searchOption;
+    }
+
+    public String login(String username) {
         if(!this.checkInput(username, Constants.ForbiddenSigns.USERNAME))
         {
             return Constants.ErrorMessages.INVALID_INPUT;
@@ -130,13 +156,17 @@ public class ViewController implements Serializable{
         return this.controler.getEntry(id);
     }
     
-    public List<Persistence.Entry> searchByTitle(String search)
+    public List<Persistence.Entry> filter(String search)
     {
         List<Persistence.Entry> results = new ArrayList<>();
         
         for(Persistence.Entry entry : this.controler.getEntriesStatic())
         {
-            if(entry.getName().contains(search))
+            if(entry.getName().contains(search)
+                    || entry.getUser().contains(search)
+                    || entry.getDescription().contains(search)
+                    || entry.getUrl().contains(search)
+                )
             {
                 results.add(entry);
             }

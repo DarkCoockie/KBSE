@@ -24,25 +24,26 @@
         </div>
         <div class="container">
             <ui:include src="import/header.xhtml" />
-                 <div class="search-box">
+            <div class="search-box">
                 <h:form>
-                    <h:inputText a:placeholder="Suchen" id="search" value="#{searchBean.searchString}" onkeypress="return event.keyCode != 13;">
-                        <f:ajax listener="#{searchBean.searchStringValueChanged}" render="output"/>
+                    <h:inputText a:placeholder="Suchen" id="search" value="#{searchBean.searchString}"
+                                 valueChangeListener="#{searchBean.filterEvent}">
                     </h:inputText>
                     <i class="material-icons">search</i>
                 </h:form>
             </div>
-            <h2>
-                <ui:repeat var="entry" value="#{searchBean.searchResults}">
-                    <h:outputText id="output" value="#{entry.name}"></h:outputText>
-                </ui:repeat>
-            </h2>
-            <h2>
-                <h:outputText id="output" value="#{searchBean.searchString}" />
-            </h2>
+            <div>
+                <h:form>
+                    <h:outputText value="Sortieren nach "></h:outputText>
+                    <h:selectOneMenu value="#{searchBean.currentSearchOption}" onchange="submit()" 
+                                     valueChangeListener="#{searchBean.sortByOptionEvent}">
+                        <f:selectItems value="#{searchBean.searchOptions}"/>
+                    </h:selectOneMenu>
+                </h:form>
+            </div>
             
             <div class="entry-container" >
-                <ui:repeat var="entry" value="#{index.entries}">
+                <ui:repeat id="entryTable" var="entry" value="#{searchBean.searchResults}">
                     <div class="entry-box">
                         <div>
                             <h3><h:outputText value="#{entry.name}" /></h3>

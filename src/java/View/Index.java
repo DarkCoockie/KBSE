@@ -23,25 +23,6 @@ public class Index implements Serializable{
     @Inject Session.ViewController vc;
     @Inject Hints hints;
     
-    private String searchString;
-    private List<Persistence.Entry> searchResults;
-
-    public List<Entry> getSearchResults() {
-        return this.searchResults;
-    }
-
-    public void setSearchResults(List<Entry> searchResults) {
-        this.searchResults = searchResults;
-    }
-
-    public String getSearchString() {
-        return this.searchString;
-    }
-
-    public void setSearchString(String searchString) {
-        this.searchString = searchString;
-    }
-    
     public List<Persistence.Entry> getEntries()
     {
         return this.vc.getEntries();

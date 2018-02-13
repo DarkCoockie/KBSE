@@ -5,6 +5,9 @@
  */
 package Constants;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author Marcel
@@ -17,4 +20,6 @@ public class General {
     public final static String NEW_ENTRY_PAGE = "/newEntry.xhtml?faces-redirect=true";
     public final static String INDEX_PAGE = "/index.xhtml?faces-redirect=true";
     public final static String INDEX_PAGE_NO_REDIRECT = "/index.xhtml";
+    
+    public final static List<String> SEARCHOPTIONS = Arrays.asList("Name", "Punkte", "Benutzer", "");
 }
