@@ -4,17 +4,26 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/View/Login.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/RESTServer/AppConfig.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/web/index.xhtml</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Constants/OrderBy.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Persistence/PersistenceController.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Constants/General.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/View/Hints.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/RESTServer/RestMember.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/View/Index.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Constants/ErrorMessages.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Session/ViewController.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Persistence/Entry.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/View/NewEntry.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/web/resources/CSS/newEntry.css</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/web/resources/CSS/index.css</file>
-            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/web/resources/JS/index.js</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Constants/ForbiddenSigns.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/RESTServer/RestEnty.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Persistence/Member.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/Controller/Controller.java</file>
+            <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/View/Head.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/src/java/View/SearchBean.java</file>
             <file>file:/C:/Users/Marcel/Documents/NetBeansProjects/KBSE/web/newEntry.xhtml</file>
         </group>
