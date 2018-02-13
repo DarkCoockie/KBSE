@@ -32,15 +32,11 @@ public class Controller implements Serializable {
     }
     
     private void updateEntryList(){
-        this.entries = pc.getAllEntrys();
+        this.entries = pc.getAllEntries();
     }
     
     public List<Persistence.Entry> getEntries(){
         updateEntryList();
-        return this.entries;
-    }
-    
-    public List<Persistence.Entry> getEntriesStatic(){
         return this.entries;
     }
     

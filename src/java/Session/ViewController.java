@@ -99,11 +99,6 @@ public class ViewController implements Serializable{
         return this.controler.getEntries();
     }
     
-    public List<Persistence.Entry> getEntriesStatic()
-    {
-        return this.controler.getEntriesStatic();
-    }
-    
     public List<Persistence.Entry> getMemberEntries()
     {
         return this.controler.getMemberEntries(this.username);
@@ -160,7 +155,7 @@ public class ViewController implements Serializable{
     {
         List<Persistence.Entry> results = new ArrayList<>();
         
-        for(Persistence.Entry entry : this.controler.getEntriesStatic())
+        for(Persistence.Entry entry : this.controler.getEntries())
         {
             if(entry.getName().contains(search)
                     || entry.getUser().contains(search)

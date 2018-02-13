@@ -13,7 +13,6 @@ import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -104,7 +103,7 @@ public class SearchBean {
         
         if(filter.equals(""))
         {
-            this.displayedEntries = this.vc.getEntriesStatic();
+            this.displayedEntries = this.vc.getEntries();
         }
         else
         {
@@ -145,7 +144,7 @@ public class SearchBean {
             }
             else
             {
-                this.displayedEntries = this.vc.getEntriesStatic();
+                this.displayedEntries = this.vc.getEntries();
             }
         }
     }

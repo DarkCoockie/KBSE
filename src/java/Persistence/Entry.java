@@ -24,8 +24,8 @@ public class Entry implements Serializable {
     private String name;
     private String description;
     private String url;
-    private int stars = 0;
     private String userName;
+    private int stars = 0;
     
     public Entry(){}
     
