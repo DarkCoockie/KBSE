@@ -5,7 +5,6 @@
  */
 package View;
 
-import Persistence.Entry;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -33,22 +32,24 @@ public class Index implements Serializable{
         return Constants.General.NEW_ENTRY_PAGE;
     }
     
-    public void incrementEntry(int id)
+    public String incrementEntry(int id)
     {
         String returnMessage = this.vc.incrementEntry(id);
         if(!returnMessage.equals(Constants.General.SUCCESS))
         {
             this.hints.addHint(returnMessage);
         }
+        return null;
     }
     
-    public void decrementEntry(int id)
+    public String decrementEntry(int id)
     {
         String returnMessage = this.vc.decrementEntry(id);
         if(!returnMessage.equals(Constants.General.SUCCESS))
         {
             this.hints.addHint(returnMessage);
         }
+        return null;
     }
     
     public boolean userHasPoints(String username)

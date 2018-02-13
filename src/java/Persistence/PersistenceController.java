@@ -94,7 +94,7 @@ public class PersistenceController implements Serializable{
         return erg;
     }
     
-    public List<Entry> getAllEntrys(){
+    public List<Entry> getAllEntries(){
         List<Entry> list = new ArrayList<>();
         //list.addAll(em.createNamedQuery("Entry.all", Entry.class).getResultList());
         

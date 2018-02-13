@@ -13,7 +13,6 @@ import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,6 +26,7 @@ import javax.inject.Named;
 @Named
 public class SearchBean {
     
+    @Inject Hints hints;
     @Inject Session.ViewController vc;
     
     private String searchString;
@@ -95,16 +95,17 @@ public class SearchBean {
     
     public String filterEvent(ValueChangeEvent e)
     {
-        return this.filter(e.getNewValue().toString());
+        this.filter(e.getNewValue().toString());
+        return null;
     }
     
-    private String filter(String value)
+    private void filter(String value)
     {
         String filter = value.trim();
         
         if(filter.equals(""))
         {
-            this.displayedEntries = this.vc.getEntriesStatic();
+            this.displayedEntries = this.vc.getEntries();
         }
         else
         {
@@ -115,13 +116,12 @@ public class SearchBean {
         {
             this.sortByOption(this.currentSearchOption);
         }
-        
-        return Constants.General.INDEX_PAGE_NO_REDIRECT + "?value=#{searchBean.searchString}";
     }
     
-    public void sortByOptionEvent(ValueChangeEvent e)
+    public String sortByOptionEvent(ValueChangeEvent e)
     {
         this.sortByOption(e.getNewValue().toString());
+        return null;
     }
     
     private void sortByOption(String option)
@@ -145,7 +145,7 @@ public class SearchBean {
             }
             else
             {
-                this.displayedEntries = this.vc.getEntriesStatic();
+                this.hints.addHint(Constants.ErrorMessages.INVALID_INPUT);
             }
         }
     }

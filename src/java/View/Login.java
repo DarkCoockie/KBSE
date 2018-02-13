@@ -5,10 +5,6 @@
  */
 package View;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,7 +18,7 @@ import javax.inject.Named;
 public class Login {
     
     @Inject Session.ViewController vc;
-    @Inject Hints allHints;
+    @Inject Hints hints;
     
     private String username;
     
@@ -41,13 +37,15 @@ public class Login {
         this.username = username;
     }
     
-    public void login()
+    public String login()
     {
         String message = this.vc.login(this.username);
         if(!message.equals(Constants.General.SUCCESS))
         {
-            this.allHints.addHint(message);
+            this.hints.addHint(message);
         }
+        
+        return Constants.General.INDEX_PAGE;
     }
     
     public String logout()
