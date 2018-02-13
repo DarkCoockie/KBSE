@@ -5,6 +5,7 @@
  */
 package View;
 
+import Persistence.Entry;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -36,6 +37,16 @@ public class NewEntry implements Serializable {
         if(this.vc.getUsername() != null && this.vc.getUsername().equals("")) this.goBackToHome();
         this.entry = new Persistence.Entry();   
     }
+
+    public Entry getEntry() {
+        return entry;
+    }
+
+    public void setEntry(Entry entry) {
+        this.entry = entry;
+    }
+    
+    
     
     public void goBackToHome(){
          FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -60,42 +71,12 @@ public class NewEntry implements Serializable {
         return this.vc.getMemberEntries();
     }
     
-      public String deleteEntry(int id){
-        String erg;
-        if( !(erg = this.vc.deleteEntry(id)).equals(Constants.General.SUCCESS)){
-           hints.addHint(erg);
-           return Constants.General.INDEX_PAGE;
-       }
-       return Constants.General.INDEX_PAGE;
-    }
-    
-    // Entry Get and Set ------------------------------------------------------
-    
-    public String getEntryName() {
-        return this.entry.getName();
-    }
-
-    public void setEntryName(String name) {
-        this.entry.setName(name);
-    }
-    
-    public int getEntryId() {
-        return this.entry.getId();
-    }
-
-    public String getEntryDescription() {
-        return this.entry.getDescription();
-    }
-
-    public void setEntryDescription(String description) {
-        this.entry.setDescription(description);
-    }
-
-    public String getEntryUrl() {
-        return this.entry.getUrl();
-    }
-
-    public void setEntryUrl(String url) {
-        this.entry.setUrl(url);
+    public String deleteEntry(int id){
+      String erg;
+      if( !(erg = this.vc.deleteEntry(id)).equals(Constants.General.SUCCESS)){
+         hints.addHint(erg);
+         return Constants.General.INDEX_PAGE;
+     }
+     return Constants.General.INDEX_PAGE;
     }
 }

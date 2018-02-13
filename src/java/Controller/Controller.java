@@ -31,8 +31,17 @@ public class Controller implements Serializable {
         this.users = new ArrayList<>();
     }
     
-    private void updateEntryList(){
-        this.entries = pc.getAllEntries();
+    private String updateEntryList(){
+        List<Persistence.Entry> entries = pc.getAllEntries();
+        if(entries != null)
+        {
+            this.entries = entries;
+        }
+        else
+        {
+            return Constants.ErrorMessages.CANT_GET_ENTRIES;
+        }
+        return Constants.General.SUCCESS;
     }
     
     public List<Persistence.Entry> getEntries(){
@@ -44,10 +53,13 @@ public class Controller implements Serializable {
         return this.pc.getEntriesByMember(username);
     }
     
-    public void addEntry(Persistence.Entry entry){   
-        if(this.pc.persitObject(entry).equals(Constants.General.SUCCESS)){
+    public String addEntry(Persistence.Entry entry){   
+        String returnMessage = this.pc.persitObject(entry);
+        if(returnMessage.equals(Constants.General.SUCCESS)){
              this.entries.add(entry);
         }
+        
+        return returnMessage;
     }
     
     public String deleteEntry(int id){
@@ -68,8 +80,14 @@ public class Controller implements Serializable {
         return null;
     }
     
-    private void updateUserList(){
-        this.users = pc.getAllUsers();
+    private String updateUserList(){
+        List<Persistence.Member> users = pc.getAllUsers();
+        if(users != null)
+        {
+            this.users = users;
+            return Constants.ErrorMessages.CANT_GET_USERS;
+        }
+        return Constants.General.SUCCESS;
     }
     
     public List<Persistence.Member> getMembers(){
@@ -77,14 +95,16 @@ public class Controller implements Serializable {
         return this.users;
     }
     
-    public void addUser(Persistence.Member user){   
-        if(this.pc.persitObject(user).equals(Constants.General.SUCCESS)){
+    public String addUser(Persistence.Member user){   
+        String returnMessage = this.pc.persitObject(user);
+        if(returnMessage.equals(Constants.General.SUCCESS)){
              this.users.add(user);
         }
+        return returnMessage;
     }
     
-    public void mergeMember(Member m){
-        this.pc.mergeUser(m);
+    public String mergeMember(Member m){
+        return this.pc.mergeUser(m);
     }
     
     public String deleteUser(String name){

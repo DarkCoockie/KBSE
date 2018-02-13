@@ -61,9 +61,7 @@ public class ViewController implements Serializable{
         }
         this.username = username;
         
-        this.controler.addUser(new Persistence.Member(username));
-        
-        return Constants.General.SUCCESS;
+        return this.controler.addUser(new Persistence.Member(username));
     }
     
     public void logout()
@@ -121,9 +119,7 @@ public class ViewController implements Serializable{
             return "[Beschreibung]" + Constants.ErrorMessages.INVALID_INPUT;
         }
         
-        this.controler.addEntry(entry);
-        
-        return Constants.General.SUCCESS;
+        return this.controler.addEntry(entry);
     }
     
     public String incrementEntry(int id)

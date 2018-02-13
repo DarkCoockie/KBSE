@@ -37,13 +37,15 @@ public class Login {
         this.username = username;
     }
     
-    public void login()
+    public String login()
     {
         String message = this.vc.login(this.username);
         if(!message.equals(Constants.General.SUCCESS))
         {
             this.hints.addHint(message);
         }
+        
+        return Constants.General.INDEX_PAGE;
     }
     
     public String logout()
