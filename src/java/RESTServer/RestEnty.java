@@ -22,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -36,84 +37,85 @@ public class RestEnty {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getAllEntrys() {
+    public Response getAllEntrys() {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 
         for (Entry e : this.controller.getEntries()) {
             arrayBuilder.add(entrytoJson(e));
         }
-        return objectBuilder.add("data", arrayBuilder.build()).build();
+        return Response.ok(objectBuilder.add("data", arrayBuilder.build()).build()).header("Access-Control-Allow-Origin", "*").build();
     }
 
     @GET
     @Path("/user/{userName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getAllEntrysByUserName(@PathParam("userName") String userName) {
+    public Response getAllEntrysByUserName(@PathParam("userName") String userName) {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 
         for (Entry e : this.controller.getMemberEntries(userName)) {
             arrayBuilder.add(entrytoJson(e));
         }
-        return objectBuilder.add("data", arrayBuilder.build()).build();
+        return Response.ok(objectBuilder.add("data", arrayBuilder.build()).build()).header("Access-Control-Allow-Origin", "*").build();
+
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{entryId}")
-    public JsonObject getEntryById(@PathParam("entryId") int id) {
+    public Response getEntryById(@PathParam("entryId") int id) {
         Entry e;
         if ((e = this.controller.getEntry(id)) != null) {
-            return this.entrytoJson(e);
+            return Response.ok(this.entrytoJson(e)).header("Access-Control-Allow-Origin", "*").build();
         }
-        return Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_FIND_ENTRY).build();
+        return Response.ok(Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_FIND_ENTRY).build()).header("Access-Control-Allow-Origin", "*").build();
     }
 
     @POST
     @Produces("text/plain")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addEnty(JsonObject o) {
+    public Response addEnty(JsonObject o) {
         //TODO Bestätiegungs- oder Fehlermeldung zurück geben
         this.controller.addEntry(new Entry(o.getString("name"), o.getString("description"), o.getString("url"), o.getString("username")));
-        return "";
+        return Response.ok("").header("Access-Control-Allow-Origin", "*").build();
     }
 
     @PUT
     @Path("/{entryId}/incStars")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("text/plain")
-    public String incEntryStart(JsonObject o, @PathParam("entryId") int id) {
+    public Response incEntryStart(JsonObject o, @PathParam("entryId") int id) {
         if (o != null) {
             if (o.getString("userName") != null) {
-                return this.controller.incrementEntry(id, o.getString("userName"));
+                return Response.ok(this.controller.incrementEntry(id, o.getString("userName"))).header("Access-Control-Allow-Origin", "*").build();
             }
         }
-        return "userName required!";
+        return Response.ok("userName required!").header("Access-Control-Allow-Origin", "*").build();
     }
 
     @PUT
     @Path("/{entryId}/decStars")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("text/plain")
-    public String decEntryStart(JsonObject o, @PathParam("entryId") int id) {
+    public Response decEntryStart(JsonObject o, @PathParam("entryId") int id) {
         if (o != null) {
             if (o.getString("userName") != null) {
-                return this.controller.decrementEntry(id, o.getString("userName"));
+                return Response.ok(this.controller.decrementEntry(id, o.getString("userName"))).header("Access-Control-Allow-Origin", "*").build();
             }
         }
-        return "userName required!";
+        return Response.ok("userName required!").header("Access-Control-Allow-Origin", "*").build();
     }
 
     @DELETE
     @Path("/{entryId}")
     @Produces("text/plain")
-    public String deleteEntry(@PathParam("entryID") int id) {
+    public Response deleteEntry(@PathParam("entryID") int id) {
         Entry e;
         if ((e = this.controller.getEntry(id)) != null) {
-            return this.controller.deleteEntry(id);
+            return Response.ok(this.controller.deleteEntry(id)).header("Access-Control-Allow-Origin", "*").build();
         }
-        return Constants.ErrorMessages.CANT_FIND_ENTRY;
+        return Response.ok(Constants.ErrorMessages.CANT_FIND_ENTRY).header("Access-Control-Allow-Origin", "*").build();
     }
 
     private JsonObject entrytoJson(Entry e) {

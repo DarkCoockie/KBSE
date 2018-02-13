@@ -7,6 +7,7 @@ package RESTServer;
 
 import Controller.Controller;
 import Persistence.Member;
+import Session.ViewController;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.json.Json;
@@ -21,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -35,74 +37,83 @@ public class RestMember {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getAllMembers(){
+    public Response getAllMembers(){
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         
         for(Member m : this.controller.getMembers()){
             arrayBuilder.add(memberToJson(m));
         }
-        return objectBuilder.add("data", arrayBuilder.build()).build();
+        return Response.ok(objectBuilder.add("data", arrayBuilder.build()).build()).header("Access-Control-Allow-Origin", "*").build();
     }  
     
     @GET
     @Path("/{memberName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getAllEntrysByUserName(@PathParam("memberName") String memberName){
+    public Response getAllEntrysByUserName(@PathParam("memberName") String memberName){
        Member m;
        if((m = this.controller.getMember(memberName)) != null){
-           return this.memberToJson(m);
+           return Response.ok(this.memberToJson(m)).header("Access-Control-Allow-Origin", "*").build();
        }
-        return Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build();
+        return Response.ok(Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build()).header("Access-Control-Allow-Origin", "*").build();
     }
     
     @POST
     @Produces("text/plain")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addMember(JsonObject o){
+    public Response addMember(JsonObject o){
         this.controller.addUser(new Member(o.getString("name")));
-        return "";
+        return Response.ok("").header("Access-Control-Allow-Origin", "*").build();
     }
     
     @PUT
     @Path("/updatePoints")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject updateMemberPoints(JsonObject o){
+    public Response updateMemberPoints(JsonObject o){
         Member m  = this.controller.getMember(o.getString("name"));
         if(m != null){
             m.setPoints(o.getInt("points"));
             this.controller.mergeMember(m);
-            return memberToJson(m);
+            return Response.ok(memberToJson(m)).header("Access-Control-Allow-Origin", "*").build();
         }
-        return Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build();
+        return Response.ok(Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build()).header("Access-Control-Allow-Origin", "*").build();
     }
     
     @GET
     @Path("/{memberId}/decPoints")
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject decMemberPoints(@PathParam("memberId") String name){
+    public Response decMemberPoints(@PathParam("memberId") String name){
          Member m  = this.controller.getMember(name);
         if(m != null){
             m.setPoints(m.getPoints()-1);
             this.controller.mergeMember(m);
-            return memberToJson(m);
+            return Response.ok(memberToJson(m)).header("Access-Control-Allow-Origin", "*").build();
         }
-        return Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build();
+        return Response.ok(Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build()).header("Access-Control-Allow-Origin", "*").build();
     }
     
     @GET
     @Path("/{memberId}/incPoints")
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject incMemberPoints(@PathParam("memberId") String name){
+    public Response incMemberPoints(@PathParam("memberId") String name){
          Member m  = this.controller.getMember(name);
         if(m != null){
             m.setPoints(m.getPoints()+1);
             this.controller.mergeMember(m);
-            return memberToJson(m);
+            return Response.ok(memberToJson(m)).header("Access-Control-Allow-Origin", "*").build();
         }
-        return Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build();
+        return Response.ok(Json.createObjectBuilder().add("error", Constants.ErrorMessages.CANT_DELETE_USER).build()).header("Access-Control-Allow-Origin", "*").build();
     }
+    
+    @GET
+    @Path("/{memberName}/login")
+    @Produces("text/plain")
+    public Response login(@PathParam("memberName") String name){
+        ViewController vc = new ViewController();
+         return Response.ok( vc.login(name)).header("Access-Control-Allow-Origin", "*").build();
+    }
+    
     
     public JsonObject memberToJson(Member m){
         return Json.createObjectBuilder()
