@@ -12,26 +12,47 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Marcel
+ *  Frontend Klasse für die Index.xhtml
+ * 
+ * @author Marcel Schulte
  */
 @Named
 @RequestScoped
 public class Index implements Serializable{
-    
+    /**
+     * Schnitstelle zu Hauptlogik
+     */
     @Inject Session.ViewController vc;
+    /**
+     * Schnitstelle zu Hinweis Organisation
+     */
     @Inject Hints hints;
     
+    /**
+     * @return Liste mit allen Entries
+     */
     public List<Persistence.Entry> getEntries()
     {
         return this.vc.getEntries();
     }
     
+    /**
+     * @return Gibt den Pfad zur NewEntry Seite zurück
+     */
     public String newEntry()
     {
         return Constants.General.NEW_ENTRY_PAGE;
     }
     
+    /**
+     * Gibt die Entry-ID an den ViewController weiter um die Anzahl der Sterne des
+     * Entries zu erhöhen und fügt die Antwort des ViewControllers zur Hinweis Liste
+     * hinzu
+     * 
+     * @param id Die ID des Entries
+     * @return null
+     * @see ViewController
+     */
     public String incrementEntry(int id)
     {
         String returnMessage = this.vc.incrementEntry(id);
@@ -42,6 +63,16 @@ public class Index implements Serializable{
         return null;
     }
     
+     
+    /**
+     * Gibt die Entry-ID an den ViewController weiter um die Anzahl der Sterne des
+     * Entries zu veringern und fügt die Antwort des ViewControllers zur Hinweis Liste
+     * hinzu
+     * 
+     * @param id Die ID des Entries
+     * @return null
+     * @see ViewController
+     */
     public String decrementEntry(int id)
     {
         String returnMessage = this.vc.decrementEntry(id);
@@ -52,9 +83,17 @@ public class Index implements Serializable{
         return null;
     }
     
-    public boolean userHasPoints(String username)
+    /**
+     * Überprüft ob der Nutzer mehr als 0 Punkte besitzt. Wird der Nutzer mit dem
+     * übergebenen Nutzernamen nicht gefunden wird Constants.ErrorMessages.CANT_FIND_USER
+     * zur Hinweis Liste hinzugefügt und false zurückgegeben
+     * 
+     * @param memberName Der Nutzername des Nutzers
+     * @return Besitzt der Nutzer mehr als 0 Pinkte wird true zurückgegeb, sons fals
+     */
+    public boolean userHasPoints(String memberName)
     {
-        Persistence.Member user = this.vc.getUser(username);
+        Persistence.Member user = this.vc.getMember(memberName);
         if(user == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
@@ -64,10 +103,23 @@ public class Index implements Serializable{
         return user.getPoints() > 0;
     }
     
-    public boolean isAuthor(int entryId, String username)
+    /**
+     * Überprüft ob der Nutzer mit dem Nutzernamen "memberName" ersteller des Entries
+     * mit der "entryId" ist. Wird der Nutzer mit dem übergebenen Nutzernamen nicht
+     * gefunden wird Constants.ErrorMessages.CANT_FIND_USER zur Hinweis Liste
+     * hinzugefügt und false zurückgegeben. Wird das Entry mit der
+     * übergebenen Entry-ID nicht gefunden wird Constants.ErrorMessages.CANT_FIND_ENTRY
+     * zur Hinweis Liste hinzugefügt und false zurückgegeben.
+     * 
+     * @param entryId
+     * @param memberName
+     * @return Ist der "membername" gleich dem Nutzernamen des Entry Objekts wird
+     *         true zurück, sonst false
+     */
+    public boolean isAuthor(int entryId, String memberName)
     {
-        Persistence.Member user = this.vc.getUser(username);
-        if(user == null)
+        Persistence.Member member = this.vc.getMember(memberName);
+        if(member == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);
             return true;
@@ -79,12 +131,23 @@ public class Index implements Serializable{
             return true;
         }
         
-        return entry.getUser().equals(user.getName());
+        return entry.getUser().equals(member.getName());
     }
     
-    public boolean userHasSpentPoints(int id, String username)
+    /**
+     * Überprüft ober der Nutzer mit dem übergebenen Nutzernamen bereits Punkte an 
+     * das Entry mit der übergebenen Entry-ID vergeben hat. Wird der Nutzer mit 
+     * dem übergebenen Nutzernamen nicht gefunden wird Constants.ErrorMessages.CANT_FIND_USER
+     * zur Hinweis Liste hinzugefügt und false zurückgegeben.
+     * 
+     * @param id Id des Entries
+     * @param memberName Nutzername des Nutzers
+     * @return Wird die Entry-Id in der ratings Map des Nutzers gefunden wird true
+     *         zurückgegeben, sonst false
+     */
+    public boolean userHasSpentPoints(int id, String memberName)
     {
-        Persistence.Member user = this.vc.getUser(username);
+        Persistence.Member user = this.vc.getMember(memberName);
         if(user == null)
         {
             this.hints.addHint(Constants.ErrorMessages.CANT_FIND_USER);

@@ -11,11 +11,16 @@ import javax.ws.rs.core.Application;
 
 /**
  *
- * @author Timo
+ * @author Timo Laser
  */
 @ApplicationPath("/resources")
 public class AppConfig extends Application {
     
+    
+    /**
+     * 
+     * @return Ein Set aller REST Klassen
+     */
     @Override
     public Set<Class<?>> getClasses(){
     Set<Class<?>> resources = new java.util.HashSet<>();

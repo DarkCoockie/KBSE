@@ -11,35 +11,62 @@ import javax.inject.Named;
 
 /**
  *
+ * 
  * @author Marcel
  */
 @Named
 @RequestScoped
 public class Login {
-    
+    /**
+     * Schnitstelle zur Hauptlogik
+     */
     @Inject Session.ViewController vc;
+      /**
+     * Schnitstelle zu Hinweis Organisation
+     */
     @Inject Hints hints;
     
-    private String username;
+    /**
+     * Zwischenablage für Nutzername
+     */
+    private String memberName;
     
+    /**
+     * Leitet den Login aufruf an den ViewController weiter
+     * 
+     * @return Die Meldung des ViewControllers
+     */
     public boolean loggedIn()
     {
         return this.vc.loggedIn();
     }
     
+    /**
+     * @return Den Nutzernamen des eingeloggten Nutzers
+     */
     public String getUsername()
     {
-        return this.vc.getUsername();
+        return this.vc.getMemberName();
     }
     
-    public void setUsername(String username)
+    /**
+     * @param memberName Den zu setzenden Nutzernamen
+     */
+    public void setUsername(String memberName)
     {
-        this.username = username;
+        this.memberName = memberName;
     }
     
+    /**
+     * Gibt this.memberName an den ViewController weiter um den Nutzer einzuloggen.
+     * Bei einem Fehlschalg wird die Meldung des ViewControlles an die Hinweis Liste 
+     * angefügt.
+     * 
+     * @return Den Pfad zu Index Seite
+     */
     public String login()
     {
-        String message = this.vc.login(this.username);
+        String message = this.vc.login(this.memberName);
         if(!message.equals(Constants.General.SUCCESS))
         {
             this.hints.addHint(message);
@@ -48,6 +75,11 @@ public class Login {
         return Constants.General.INDEX_PAGE;
     }
     
+    /**
+     * Loggt den Nutzer aus
+     * 
+     * @return Den Pfad zu Index Seite
+     */
     public String logout()
     {
         this.vc.logout();

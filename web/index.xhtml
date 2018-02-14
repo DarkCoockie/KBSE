@@ -12,7 +12,7 @@
         <h:outputStylesheet library="CSS" name="general.css"  />
         <!-- Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet" />
+              rel="stylesheet" />
     </h:head>
     <h:body>
         <div class="hint-box">
@@ -33,15 +33,17 @@
                 </h:form>
             </div>
             <div>
-                <h:form>
-                    <h:outputText value="Sortieren nach "></h:outputText>
-                    <h:selectOneMenu value="#{searchBean.currentSortingOption}" onchange="submit()" 
-                                     valueChangeListener="#{searchBean.sortByOptionEvent}">
-                        <f:selectItems value="#{searchBean.sortingOptions}"/>
-                    </h:selectOneMenu>
-                </h:form>
+                <div class="sort-box">
+                    <h:form>
+                        <h:outputText value="Sortieren nach "></h:outputText>
+                        <h:selectOneMenu value="#{searchBean.currentSortingOption}" onchange="submit()" 
+                                         valueChangeListener="#{searchBean.sortByOptionEvent}">
+                            <f:selectItems value="#{searchBean.sortingOptions}"/>
+                        </h:selectOneMenu>
+                    </h:form>
+                </div>
             </div>
-            
+
             <div class="entry-container" >
                 <ui:repeat id="entryTable" var="entry" value="#{searchBean.displayedEntries}">
                     <div class="entry-box">
@@ -65,7 +67,7 @@
                                                    rendered="#{login.loggedIn() and entry.hasStars() and
                                                                !index.isAuthor(entry.id, login.username) and
                                                                index.userHasSpentPoints(entry.id, login.username)}"> 
-                                       <i class="material-icons">keyboard_arrow_down</i>
+                                        <i class="material-icons">keyboard_arrow_down</i>
                                     </h:commandLink>
                                 </div>
                             </h:form>
@@ -73,7 +75,7 @@
                         <div>
                             <span>Erstellt von: <h:outputText value="#{entry.user}"/></span>
                             <span>Bewertung: <h:outputText value="#{entry.stars}"/></span> 
-                       </div>
+                        </div>
                     </div>
 
                 </ui:repeat>  
