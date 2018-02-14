@@ -7,7 +7,6 @@ package RESTServer;
 
 import Controller.Controller;
 import Persistence.Member;
-import Session.ViewController;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.json.Json;
