@@ -18,7 +18,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
+ * Schnittstelle fuer Such- und Sortier-Funktionen
  * @author Marcel
  */
 @ManagedBean
@@ -32,14 +32,14 @@ public class SearchBean {
     private String searchString;
     private List<Persistence.Entry> displayedEntries;
     
-    private List<String> searchOptions;
-    private String currentSearchOption;
+    private List<String> sortingOptions;
+    private String currentSortingOption;
     
     @PostConstruct
     private void init()
     {
         this.populateSearchOptions();
-        this.currentSearchOption = this.vc.getSearchOption();
+        this.currentSortingOption = this.vc.getSearchOption();
         this.displayedEntries = this.vc.getEntries();
         this.searchString = this.vc.getSearchString();
         this.filter(this.searchString);
@@ -48,57 +48,101 @@ public class SearchBean {
     @PreDestroy
     private void demo()
     {
-        this.vc.setSearchOption(this.currentSearchOption);
+        this.vc.setSearchOption(this.currentSortingOption);
         this.vc.setSearchString(this.searchString);
     }
     
-
-    public List<String> getSearchOptions() {
-        return searchOptions;
+    /**
+     *
+     * @return      Liste moeglicher Sortier-Optionen
+     */
+    public List<String> getSortingOptions() {
+        return sortingOptions;
+    }
+    
+    /**
+     *
+     * @param sortingOptions Liste moeglicher Sortier-Optionen
+     */
+    public void setSotingOptions(List<String> sortingOptions) {
+        this.sortingOptions = sortingOptions;
+    }
+    
+    /**
+     *
+     * @return      Die aktive Sortier-Option
+     */
+    public String getCurrentSortingOption() {
+        return currentSortingOption;
     }
 
-    public void setSearchOptions(List<String> searchOptions) {
-        this.searchOptions = searchOptions;
+    /**
+     *
+     * @param currentSortingOption Die aktive Sortier-Option
+     */
+    public void setCurrentSortingOption(String currentSortingOption) {
+        this.currentSortingOption = currentSortingOption;
     }
 
-    public String getCurrentSearchOption() {
-        return currentSearchOption;
-    }
-
-    public void setCurrentSearchOption(String currentSearchOption) {
-        this.currentSearchOption = currentSearchOption;
-    }
-
+    /**
+     *
+     * @return      Der String zur Filterung der Eintraege
+     */
     public String getSearchString() {
         return searchString;
     }
 
+    /**
+     *
+     * @param searchString  Der String zur Filterung der Eintraege
+     */
     public void setSearchString(String searchString) {
         this.searchString = searchString;
     }
 
-    public List<Entry> getSearchResults() {
+    /**
+     *
+     * @return      Liste der anzuzeigenden Einträge
+     */
+    public List<Entry> getDisplayedEntries() {
         return displayedEntries;
     }
 
-    public void setSearchResults(List<Entry> searchResults) {
-        this.displayedEntries = searchResults;
+    /**
+     *
+     * @param displayedEntries Liste der anzuzeigenden Einträge
+     */
+    public void setDisplayedEntries(List<Entry> displayedEntries) {
+        this.displayedEntries = displayedEntries;
     }
     
+    /**
+     * Fuellt die Such-Optionen mit Standardwerten
+     * @see Constants.OrderBy
+     */
     private void populateSearchOptions()
     {
-        this.searchOptions = new ArrayList<>();
-        this.searchOptions.add(Constants.OrderBy.NAME);
-        this.searchOptions.add(Constants.OrderBy.RATING);
-        this.searchOptions.add(Constants.OrderBy.USER);
+        this.sortingOptions = new ArrayList<>();
+        this.sortingOptions.add(Constants.OrderBy.NAME);
+        this.sortingOptions.add(Constants.OrderBy.RATING);
+        this.sortingOptions.add(Constants.OrderBy.USER);
     }
     
+    /**
+     * Empfaenger fuer die das Event der Aenderung des searchString
+     * @param e
+     * @return null
+     */
     public String filterEvent(ValueChangeEvent e)
     {
         this.filter(e.getNewValue().toString());
         return null;
     }
     
+    /**
+     * Filtert die Eintraege
+     * @param value String, nach dem in den Eintraegen gesucht werden soll
+     */
     private void filter(String value)
     {
         String filter = value.trim();
@@ -114,16 +158,25 @@ public class SearchBean {
         
         if(this.displayedEntries.size() > 0)
         {
-            this.sortByOption(this.currentSearchOption);
+            this.sortByOption(this.currentSortingOption);
         }
     }
     
+    /**
+     * Empfaenger fuer die das Event der Aenderung der aktive Sortier-Option
+     * @param e
+     * @return null
+     */
     public String sortByOptionEvent(ValueChangeEvent e)
     {
         this.sortByOption(e.getNewValue().toString());
         return null;
     }
     
+    /**
+     * Sortiert die Eintraege nach dem angegebenen Kriterium
+     * @param option
+     */
     private void sortByOption(String option)
     {
         if(this.displayedEntries.size() > 0 && option != null)

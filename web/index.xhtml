@@ -35,15 +35,15 @@
             <div>
                 <h:form>
                     <h:outputText value="Sortieren nach "></h:outputText>
-                    <h:selectOneMenu value="#{searchBean.currentSearchOption}" onchange="submit()" 
+                    <h:selectOneMenu value="#{searchBean.currentSortingOption}" onchange="submit()" 
                                      valueChangeListener="#{searchBean.sortByOptionEvent}">
-                        <f:selectItems value="#{searchBean.searchOptions}"/>
+                        <f:selectItems value="#{searchBean.sortingOptions}"/>
                     </h:selectOneMenu>
                 </h:form>
             </div>
             
             <div class="entry-container" >
-                <ui:repeat id="entryTable" var="entry" value="#{searchBean.searchResults}">
+                <ui:repeat id="entryTable" var="entry" value="#{searchBean.displayedEntries}">
                     <div class="entry-box">
                         <div>
                             <h3><h:outputText value="#{entry.name}" /></h3>
