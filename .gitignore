@@ -2,3 +2,4 @@ build/
 nbproject/private/
 src/conf/persistence.xml
 *.class
+/KBSE_html5/nbproject/private/

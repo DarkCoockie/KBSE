@@ -135,6 +135,12 @@ public class Controller implements Serializable {
         if(user == null)
             return Constants.ErrorMessages.CANT_FIND_USER;
         
+        if(user.getPoints() <= 0)
+            return Constants.ErrorMessages.NO_USER_POINTS_LEFT;
+        
+         if(entry.getUser().equals(user.getName()))
+            return Constants.ErrorMessages.USER_CANT_VOTE_OWN_ENTRY;
+        
          String msg = user.incRating(entry);
          if( !msg.equals(Constants.General.SUCCESS) ) return msg;
          msg = this.pc.mergeUser(user);
@@ -148,9 +154,15 @@ public class Controller implements Serializable {
         if(entry == null)
             return Constants.ErrorMessages.CANT_FIND_ENTRY;
         
+        if(entry.getStars() <= 0)
+            return Constants.ErrorMessages.ENTRY_STATS_ARE_NULL;
+        
         Persistence.Member user = this.getMember(username);
         if(user == null)
             return Constants.ErrorMessages.CANT_FIND_USER;
+        
+        if(entry.getUser().equals(user.getName()))
+            return Constants.ErrorMessages.USER_CANT_VOTE_OWN_ENTRY;
         
          String msg = user.decRating(entry);
          if( !msg.equals(Constants.General.SUCCESS) ) return msg;

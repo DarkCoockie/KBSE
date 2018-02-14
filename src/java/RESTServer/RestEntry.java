@@ -14,7 +14,6 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -93,27 +92,27 @@ public class RestEntry {
         return Response.ok("").header("Access-Control-Allow-Origin", "*").build();
     }
 
-    @PUT
-    @Path("/{entryId}/incStars")
+    @GET
+    @Path("/{entryId}/incStars/{userName}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("text/plain")
-    public Response incEntryStart(JsonObject o, @PathParam("entryId") int id) {
-        if (o != null) {
-            if (o.getString("userName") != null) {
-                return Response.ok(this.controller.incrementEntry(id, o.getString("userName"))).header("Access-Control-Allow-Origin", "*").build();
+    public Response incEntryStart(@PathParam("userName") String name, @PathParam("entryId") int id) {
+        if (name != null) {
+            if (name != null) {
+                return Response.ok(this.controller.incrementEntry(id, name)).header("Access-Control-Allow-Origin", "*").build();
             }
         }
         return Response.ok("userName required!").header("Access-Control-Allow-Origin", "*").build();
     }
 
-    @PUT
-    @Path("/{entryId}/decStars")
+    @GET
+    @Path("/{entryId}/decStars/{userName}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces("text/plain")
-    public Response decEntryStart(JsonObject o, @PathParam("entryId") int id) {
-        if (o != null) {
-            if (o.getString("userName") != null) {
-                return Response.ok(this.controller.decrementEntry(id, o.getString("userName"))).header("Access-Control-Allow-Origin", "*").build();
+    public Response decEntryStart(@PathParam("userName") String name, @PathParam("entryId") int id) {
+        if (name != null) {
+            if (name != null) {
+                return Response.ok(this.controller.decrementEntry(id, name)).header("Access-Control-Allow-Origin", "*").build();
             }
         }
         return Response.ok("userName required!").header("Access-Control-Allow-Origin", "*").build();
@@ -122,7 +121,7 @@ public class RestEntry {
     @GET
     @Path("/delete/{entryId}")
     @Produces("text/plain")
-    public Response deleteEntry(@PathParam("entryID") int id) {
+    public Response deleteEntry(@PathParam("entryId") int id) {
         Entry e;
         if ((e = this.controller.getEntry(id)) != null) {
             return Response.ok(this.controller.deleteEntry(id)).header("Access-Control-Allow-Origin", "*").build();
